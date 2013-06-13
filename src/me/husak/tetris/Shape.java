@@ -15,7 +15,7 @@ public class Shape {
   }
 
   public Shape rotateCounterClockwise() {
-    for(Point point : points_) {
+    for (Point point : points_) {
       point.rotateCounterClockwise();
     }
     return this;
