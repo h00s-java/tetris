@@ -12,9 +12,13 @@ public class Tetris {
     frame.pack();
     frame.setVisible(true);
 
-    Shape shape = new Shape(new Point[] {new Point(-1,0), new Point(0,0), new Point(0,1), new Point(1,0)});
-    System.out.println(shape);
+    LShape shape = new LShape();
+    System.out.println(shape.minY() + "," + shape.minX());
     shape.rotateClockwise();
-    System.out.println(shape);
+    System.out.println(shape.minY() + "," + shape.minX());
+    shape.rotateClockwise();
+    System.out.println(shape.minY() + "," + shape.minX());
+    shape.rotateClockwise();
+    System.out.println(shape.minY() + "," + shape.minX());
   }
 }
