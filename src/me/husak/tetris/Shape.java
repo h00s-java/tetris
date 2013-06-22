@@ -4,8 +4,9 @@ public class Shape {
   private Point[] points_;
   private Point position_;
 
-  public Shape(Point[] points) {
+  public Shape(Point[] points, Point position) {
     points_ = points;
+    position_ = position;
   }
 
   public Shape rotateClockwise() {
@@ -62,7 +63,7 @@ public class Shape {
     for (Point point : points_) {
       output += point.toString() + ",";
     }
-    return output + "]";
+    return output + " @" + position_.toString() + "]";
   }
 
 }

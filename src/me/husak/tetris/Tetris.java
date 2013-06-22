@@ -12,13 +12,7 @@ public class Tetris {
     frame.pack();
     frame.setVisible(true);
 
-    LShape shape = new LShape();
-    System.out.println(shape.minY() + "," + shape.minX());
-    shape.rotateClockwise();
-    System.out.println(shape.minY() + "," + shape.minX());
-    shape.rotateClockwise();
-    System.out.println(shape.minY() + "," + shape.minX());
-    shape.rotateClockwise();
-    System.out.println(shape.minY() + "," + shape.minX());
+    LShape shape = new LShape(2, 3);
+    System.out.println(shape.toString());
   }
 }
