@@ -19,6 +19,10 @@ public class Point {
     coordinates_ = coordinates;
   }
 
+  public void setCoordinates(int x, int y) {
+    coordinates_.setValues(x, y);
+  }
+
   public void rotateClockwise() {
     coordinates_.setValues(coordinates_.getY(), -1 * coordinates_.getX());
   }

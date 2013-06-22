@@ -2,6 +2,7 @@ package me.husak.tetris;
 
 public class Shape {
   private Point[] points_;
+  private Point position_;
 
   public Shape(Point[] points) {
     points_ = points;
@@ -18,6 +19,20 @@ public class Shape {
     for (Point point : points_) {
       point.rotateCounterClockwise();
     }
+    return this;
+  }
+
+  public Point getPosition() {
+    return position_;
+  }
+
+  public Shape setPosition(Point position) {
+    position_ = position;
+    return this;
+  }
+
+  public Shape setPosition(int x, int y) {
+    position_.setCoordinates(x, y);
     return this;
   }
 
