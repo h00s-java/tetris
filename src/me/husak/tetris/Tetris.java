@@ -12,7 +12,10 @@ public class Tetris {
     frame.pack();
     frame.setVisible(true);
 
-    LShape shape = new LShape(2, 3);
-    System.out.println(shape.toString());
+    Board board = new Board();
+    System.out.println(board.toString());
+    board.addShape(new LShape(2, 1));
+    board.addShape(new LShape(3, 2));
+    System.out.println(board.toString());
   }
 }
