@@ -1,39 +1,58 @@
 package me.husak.tetris;
 
 public class Point {
-  private Coordinates coordinates_;
+  private int[] coordinates_;
 
-  public Point(Coordinates coordinates) {
-    coordinates_ = coordinates;
+  public Point() {
+    coordinates_ = new int[2];
   }
 
   public Point(int x, int y) {
-    coordinates_ = new Coordinates(x, y);
+    this();
+    setX(x);
+    setY(y);
   }
 
-  public Coordinates getCoordinates() {
+  public int getX() {
+    return coordinates_[0];
+  }
+
+  public int getY() {
+    return coordinates_[1];
+  }
+
+  public Point setX(int x) {
+    coordinates_[0] = x;
+    return this;
+  }
+
+  public Point setY(int y) {
+    coordinates_[1] = y;
+    return this;
+  }
+
+  public int[] getCoordinates() {
     return coordinates_;
   }
 
-  public void setCoordinates(Coordinates coordinates) {
-    coordinates_ = coordinates;
+  public Point setCoordinates(int x, int y) {
+    setX(x);
+    return setY(y);
   }
 
-  public void setCoordinates(int x, int y) {
-    coordinates_.setValues(x, y);
+  public Point rotateClockwise() {
+    setCoordinates(getY(), -1 * getX());
+    return this;
   }
 
-  public void rotateClockwise() {
-    coordinates_.setValues(coordinates_.getY(), -1 * coordinates_.getX());
-  }
-
-  public void rotateCounterClockwise() {
-    coordinates_.setValues(-1 * coordinates_.getY(), coordinates_.getX());
+  public Point rotateCounterClockwise() {
+    setCoordinates(-1 * getY(), getX());
+    return this;
   }
 
   @Override
   public String toString() {
-    return "(" + coordinates_.toString() + ")";
+    return "(" + getX() + "," + getY() + ")";
   }
 
 }
