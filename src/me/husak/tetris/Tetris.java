@@ -12,15 +12,9 @@ public class Tetris {
     frame.pack();
     frame.setVisible(true);
 
-    /*Board board = new Board();
-    System.out.println(board.toString());
-    board.addShape(new LTetromino(2, 1));
-    board.addShape(new LTetromino(3, 2));
-    System.out.println(board.toString());*/
+    Board board = new Board();
+    board.spawnTetromino();
+    System.out.println(board.getCurrentTetromino().toString());
 
-    LTetromino tetro = new LTetromino(2, 3);
-    System.out.println(tetro.toString());
-    tetro.rotateClockwise();
-    System.out.println(tetro.toString());
   }
 }

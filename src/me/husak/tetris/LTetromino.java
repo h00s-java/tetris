@@ -15,4 +15,9 @@ public class LTetromino extends Tetromino {
   public LTetromino(int x, int y) {
     this(new Point(x, y));
   }
+
+  @Override
+  public String toString() {
+    return "L: " + super.toString();
+  }
 }

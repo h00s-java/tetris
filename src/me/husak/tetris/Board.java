@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Board {
   private Block[][] blocks_ = new Block[getWidth()][getHeight()];
-  private Tetromino currentTetromino_;
+  private Tetromino currentTetromino_, nextTetromino_;
 
-  private Tetromino getCurrentTetromino() {
+  public Tetromino getCurrentTetromino() {
     return currentTetromino_;
   }
 
@@ -17,6 +17,39 @@ public class Board {
 
   public int getHeight() {
     return 22;
+  }
+
+  public void spawnTetromino() {
+    if (nextTetromino_ == null) {
+      nextTetromino_ = createRandomTetromino();
+      currentTetromino_ = createRandomTetromino();
+    }
+    else {
+      currentTetromino_ = nextTetromino_;
+      nextTetromino_ = createRandomTetromino();
+    }
+    currentTetromino_.setPosition(getWidth() / 2 - 1, getHeight() - 1);
+  }
+
+  private Tetromino createRandomTetromino() {
+    int random = (int) (Math.random() * 7);
+    switch (random) {
+      case 0:
+        return new ITetromino(0, 0);
+      case 1:
+        return new LTetromino(0, 0);
+      case 2:
+        return new LTetromino(0, 0);
+      case 3:
+        return new LTetromino(0, 0);
+      case 4:
+        return new LTetromino(0, 0);
+      case 5:
+        return new LTetromino(0, 0);
+      case 6:
+        return new LTetromino(0, 0);
+    }
+    return null;
   }
 
   @Override
