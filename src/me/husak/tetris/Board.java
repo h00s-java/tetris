@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-  private List<Tetromino> tetrominos_ = new ArrayList<Tetromino>();
+  private Block[][] blocks_ = new Block[getWidth()][getHeight()];
   private Tetromino currentTetromino_;
-  private int width_ = 10;
-  private int height_ = 22;
 
   private Tetromino getCurrentTetromino() {
     return currentTetromino_;
   }
 
-  public Board addTetromino(Tetromino Tetromino) {
-    currentTetromino_ = Tetromino;
-    tetrominos_.add(Tetromino);
-    return this;
+  public int getWidth() {
+    return 10;
+  }
+
+  public int getHeight() {
+    return 22;
   }
 
   @Override
   public String toString() {
-    return "Tetrominos count: " + tetrominos_.size();
+    return "";
   }
-
 }
