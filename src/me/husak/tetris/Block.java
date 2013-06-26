@@ -3,18 +3,18 @@ package me.husak.tetris;
 import java.awt.*;
 
 public class Block extends Point {
-  private Color color_;
+  private Color color;
 
   public Block(int x, int y, Color color) {
     super(x, y);
-    color_ = color;
+    this.color = color;
   }
 
   public Color getColor() {
-    return color_;
+    return color;
   }
 
   public void setColor(Color color) {
-    color_ = color;
+    this.color = color;
   }
 }

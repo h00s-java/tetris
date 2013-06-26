@@ -4,31 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-  private Block[][] blocks_ = new Block[getWidth()][getHeight()];
-  private Tetromino currentTetromino_, nextTetromino_;
+  private Block[][] blocks = new Block[HEIGHT][WIDTH];
+  private Tetromino currentTetromino, nextTetromino;
+
+  private static final int HEIGHT = 22;
+  private static final int WIDTH = 10;
 
   public Tetromino getCurrentTetromino() {
-    return currentTetromino_;
-  }
-
-  public int getWidth() {
-    return 10;
-  }
-
-  public int getHeight() {
-    return 22;
+    return currentTetromino;
   }
 
   public void spawnTetromino() {
-    if (nextTetromino_ == null) {
-      nextTetromino_ = createRandomTetromino();
-      currentTetromino_ = createRandomTetromino();
+    if (nextTetromino == null) {
+      nextTetromino = createRandomTetromino();
+      currentTetromino = createRandomTetromino();
     }
     else {
-      currentTetromino_ = nextTetromino_;
-      nextTetromino_ = createRandomTetromino();
+      currentTetromino = nextTetromino;
+      nextTetromino = createRandomTetromino();
     }
-    currentTetromino_.setPosition(getWidth() / 2 - 1, getHeight() - 1);
+    currentTetromino.setPosition(WIDTH / 2 - 1, HEIGHT - 1);
   }
 
   private Tetromino createRandomTetromino() {

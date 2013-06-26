@@ -1,10 +1,10 @@
 package me.husak.tetris;
 
 public class Point {
-  private int[] coordinates_;
+  private int[] coordinates;
 
   public Point() {
-    coordinates_ = new int[2];
+    coordinates = new int[2];
   }
 
   public Point(int x, int y) {
@@ -14,25 +14,25 @@ public class Point {
   }
 
   public int getX() {
-    return coordinates_[0];
+    return coordinates[0];
   }
 
   public int getY() {
-    return coordinates_[1];
+    return coordinates[1];
   }
 
   public Point setX(int x) {
-    coordinates_[0] = x;
+    coordinates[0] = x;
     return this;
   }
 
   public Point setY(int y) {
-    coordinates_[1] = y;
+    coordinates[1] = y;
     return this;
   }
 
   public int[] getCoordinates() {
-    return coordinates_;
+    return coordinates;
   }
 
   public Point setCoordinates(int x, int y) {
