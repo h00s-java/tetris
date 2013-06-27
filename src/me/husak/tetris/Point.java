@@ -40,6 +40,16 @@ public class Point {
     return setY(y);
   }
 
+  public Point addPoint(Point point) {
+    setCoordinates(getX() + point.getX(), getY() + point.getY());
+    return this;
+  }
+
+  public Point subtractPoint(Point point) {
+    setCoordinates(getX() - point.getX(), getY() - point.getY());
+    return this;
+  }
+
   public Point rotateClockwise() {
     setCoordinates(getY(), -1 * getX());
     return this;

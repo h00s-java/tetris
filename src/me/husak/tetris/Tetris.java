@@ -15,6 +15,7 @@ public class Tetris {
     Board board = new Board();
     board.spawnTetromino();
     System.out.println(board.getCurrentTetromino().toString());
-
+    board.getCurrentTetromino().rotateClockwise();
+    System.out.println(board.getCurrentTetromino().toString());
   }
 }

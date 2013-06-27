@@ -9,18 +9,8 @@ public class Tetromino {
     this.position = position;
   }
 
-  public Tetromino rotateClockwise() {
-    for (Block block : blocks) {
-      block.rotateClockwise();
-    }
-    return this;
-  }
-
-  public Tetromino rotateCounterClockwise() {
-    for (Block block : blocks) {
-      block.rotateCounterClockwise();
-    }
-    return this;
+  public Block[] getBlocks() {
+    return blocks;
   }
 
   public Point getPosition() {
@@ -28,17 +18,34 @@ public class Tetromino {
   }
 
   public Tetromino setPosition(Point position) {
+    for (Block block : blocks) {
+      block.subtractPoint(this.position);
+      block.addPoint(position);
+    }
     this.position = position;
     return this;
   }
 
   public Tetromino setPosition(int x, int y) {
-    position.setCoordinates(x, y);
+    setPosition(new Point(x, y));
     return this;
   }
 
-  public Tetromino offsetPosition(int x, int y) {
-    position.setCoordinates(x + position.getX(), y + position.getY());
+  public Tetromino rotateClockwise() {
+    for (Block block : blocks) {
+      block.subtractPoint(position);
+      block.rotateClockwise();
+      block.addPoint(position);
+    }
+    return this;
+  }
+
+  public Tetromino rotateCounterClockwise() {
+    for (Block block : blocks) {
+      block.subtractPoint(position);
+      block.rotateCounterClockwise();
+      block.addPoint(position);
+    }
     return this;
   }
 
