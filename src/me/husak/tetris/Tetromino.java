@@ -1,54 +1,54 @@
 package me.husak.tetris;
 
 public class Tetromino {
-  private Block[] blocks_;
-  private Point position_;
+  private Block[] blocks;
+  private Point position;
 
   public Tetromino(Block[] blocks, Point position) {
-    blocks_ = blocks;
-    position_ = position;
+    this.blocks = blocks;
+    this.position = position;
   }
 
   public Tetromino rotateClockwise() {
-    for (Block block : blocks_) {
+    for (Block block : blocks) {
       block.rotateClockwise();
     }
     return this;
   }
 
   public Tetromino rotateCounterClockwise() {
-    for (Block block : blocks_) {
+    for (Block block : blocks) {
       block.rotateCounterClockwise();
     }
     return this;
   }
 
   public Point getPosition() {
-    return position_;
+    return position;
   }
 
   public Tetromino setPosition(Point position) {
-    position_ = position;
+    this.position = position;
     return this;
   }
 
   public Tetromino setPosition(int x, int y) {
-    position_.setCoordinates(x, y);
+    position.setCoordinates(x, y);
     return this;
   }
 
   public Tetromino offsetPosition(int x, int y) {
-    position_.setCoordinates(x + position_.getX(), y + position_.getY());
+    position.setCoordinates(x + position.getX(), y + position.getY());
     return this;
   }
 
   @Override
   public String toString() {
     String output = "[";
-    for (Block block : blocks_) {
+    for (Block block : blocks) {
       output += block.toString() + ",";
     }
-    return output + " @" + position_.toString() + "]";
+    return output + " @" + position.toString() + "]";
   }                                               
 
 }
