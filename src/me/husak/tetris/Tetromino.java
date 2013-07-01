@@ -9,6 +9,14 @@ public class Tetromino {
     this.position = position;
   }
 
+  public Tetromino(Tetromino tetromino) {
+    this.blocks = new Block[tetromino.getBlocks().length];
+    for (int i = 0; i < tetromino.getBlocks().length; i++) {
+      this.blocks[i] = new Block(tetromino.getBlocks()[i]);
+    }
+    this.position = new Point(tetromino.position);
+  }
+
   public Block[] getBlocks() {
     return blocks;
   }

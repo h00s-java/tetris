@@ -17,5 +17,10 @@ public class Tetris {
     System.out.println(board.getCurrentTetromino().toString());
     board.getCurrentTetromino().rotateClockwise();
     System.out.println(board.getCurrentTetromino().toString());
+    Tetromino novi = new Tetromino(board.getCurrentTetromino());
+    System.out.println(novi.toString());
+    novi.rotateClockwise();
+    System.out.println(novi.toString());
+    System.out.println(board.getCurrentTetromino().toString());
   }
 }

@@ -13,6 +13,10 @@ public class Point {
     setY(y);
   }
 
+  public Point(Point point) {
+    this(point.getX(), point.getY());
+  }
+
   public int getX() {
     return coordinates[0];
   }

@@ -10,6 +10,10 @@ public class Block extends Point {
     this.color = color;
   }
 
+  public Block(Block block) {
+    this(block.getX(), block.getY(), block.getColor());
+  }
+
   public Color getColor() {
     return color;
   }
