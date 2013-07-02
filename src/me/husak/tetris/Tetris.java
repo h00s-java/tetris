@@ -14,13 +14,22 @@ public class Tetris {
 
     Board board = new Board();
     board.spawnTetromino();
-    System.out.println(board.getCurrentTetromino().toString());
+    /*System.out.println(board.getCurrentTetromino().toString());
     board.getCurrentTetromino().rotateClockwise();
     System.out.println(board.getCurrentTetromino().toString());
     Tetromino novi = new Tetromino(board.getCurrentTetromino());
     System.out.println(novi.toString());
     novi.rotateClockwise();
     System.out.println(novi.toString());
+    System.out.println(board.getCurrentTetromino().toString());*/
+
+    board.moveCurrentTetrominoDown();
+    System.out.println(board.getCurrentTetromino().toString());
+    board.moveCurrentTetrominoDown();
+    System.out.println(board.getCurrentTetromino().toString());
+    board.moveCurrentTetrominoDown();
+    System.out.println(board.getCurrentTetromino().toString());
+    board.moveCurrentTetrominoDown();
     System.out.println(board.getCurrentTetromino().toString());
   }
 }

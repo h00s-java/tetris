@@ -39,6 +39,33 @@ public class Tetromino {
     return this;
   }
 
+  public Tetromino moveLeft() {
+    Tetromino tetromino = new Tetromino(this);
+    for (Block block : tetromino.getBlocks()) {
+      block.setX(block.getX() - 1);
+    }
+    tetromino.getPosition().setCoordinates(tetromino.getPosition().getX() - 1, tetromino.getPosition().getY());
+    return tetromino;
+  }
+
+  public Tetromino moveRight() {
+    Tetromino tetromino = new Tetromino(this);
+    for (Block block : tetromino.getBlocks()) {
+      block.setX(block.getX() + 1);
+    }
+    tetromino.getPosition().setCoordinates(tetromino.getPosition().getX() + 1, tetromino.getPosition().getY());
+    return tetromino;
+  }
+
+  public Tetromino moveDown() {
+    Tetromino tetromino = new Tetromino(this);
+    for (Block block : tetromino.getBlocks()) {
+      block.setY(block.getY() - 1);
+    }
+    tetromino.getPosition().setCoordinates(tetromino.getPosition().getX(), tetromino.getPosition().getY() - 1);
+    return tetromino;
+  }
+
   public Tetromino rotateClockwise() {
     for (Block block : blocks) {
       block.subtractPoint(position);

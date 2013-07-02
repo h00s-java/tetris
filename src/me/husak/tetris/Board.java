@@ -10,20 +10,57 @@ public class Board {
   private static final int HEIGHT = 22;
   private static final int WIDTH = 10;
 
+  public boolean validTetrominoPosition(Tetromino tetromino) {
+    for (Block block : tetromino.getBlocks()) {
+      if (!validBlockPosition(block)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private boolean validBlockPosition(Block block) {
+    return !((block.getX() < 0) ||
+        (block.getY() < 0) ||
+        (block.getX() > (WIDTH-1)) ||
+        (block.getY() > (HEIGHT-1)) ||
+        (blocks[block.getY()][block.getX()] != null));
+  }
+
   public Tetromino getCurrentTetromino() {
     return currentTetromino;
+  }
+
+  public void moveCurrentTetrominoLeft() {
+    Tetromino tetromino = currentTetromino.moveLeft();
+    if (validTetrominoPosition(tetromino)) {
+      currentTetromino = tetromino;
+    }
+  }
+
+  public void moveCurrentTetrominoRight() {
+    Tetromino tetromino = currentTetromino.moveRight();
+    if (validTetrominoPosition(tetromino)) {
+      currentTetromino = tetromino;
+    }
+  }
+
+  public void moveCurrentTetrominoDown() {
+    Tetromino tetromino = currentTetromino.moveDown();
+    if (validTetrominoPosition(tetromino)) {
+      currentTetromino = tetromino;
+    }
   }
 
   public void spawnTetromino() {
     if (nextTetromino == null) {
       nextTetromino = createRandomTetromino();
       currentTetromino = createRandomTetromino();
-    }
-    else {
+    } else {
       currentTetromino = nextTetromino;
       nextTetromino = createRandomTetromino();
     }
-    currentTetromino.setPosition(WIDTH / 2 - 1, HEIGHT - 1);
+    currentTetromino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
   }
 
   private Tetromino createRandomTetromino() {
