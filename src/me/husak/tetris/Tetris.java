@@ -25,7 +25,7 @@ public class Tetris extends JFrame {
 
     boardPanel.setBackground(Color.BLACK);
 
-    setSize(200, 470 + statusBar.getHeight());
+    setSize(200, 480 + statusBar.getHeight());
     //boardPanel.setSize(200, 440);
     setTitle("Tetris");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
