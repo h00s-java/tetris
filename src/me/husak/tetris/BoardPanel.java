@@ -9,11 +9,14 @@ import java.awt.event.KeyEvent;
 
 public class BoardPanel extends JPanel implements ActionListener {
   private Board board;
+  private Timer timer;
 
   public BoardPanel(Tetris parent) {
     setFocusable(true);
     board = new Board(this);
     addKeyListener(new TAdapter());
+    timer = new Timer(1000, this);
+    timer.start();
   }
 
   public void paint(Graphics g) {
@@ -33,7 +36,8 @@ public class BoardPanel extends JPanel implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    board.moveCurrentTetrominoDown();
+    repaint();
   }
 
   class TAdapter extends KeyAdapter {
