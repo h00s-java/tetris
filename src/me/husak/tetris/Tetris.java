@@ -1,35 +1,47 @@
 package me.husak.tetris;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class Tetris {
-  private JPanel tetrisPanel;
+public class Tetris extends JFrame {
+
+  private JLabel statusBar;
+  private BoardPanel boardPanel;
+
+  public Tetris() {
+    statusBar = new JLabel(" 0");
+    add(statusBar, BorderLayout.NORTH);
+    boardPanel = new BoardPanel(this);
+    add(boardPanel);
+    //board.start();
+
+    initUI();
+  }
+
+  private void initUI() {
+    statusBar.setOpaque(true);
+    statusBar.setBackground(Color.BLACK);
+    statusBar.setForeground(Color.WHITE);
+
+    boardPanel.setBackground(Color.BLACK);
+
+    setSize(200, 470 + statusBar.getHeight());
+    //boardPanel.setSize(200, 440);
+    setTitle("Tetris");
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+  }
+
+  public JLabel getStatusBar() {
+    return statusBar;
+  }
+
+  public BoardPanel getBoardPanel() {
+    return boardPanel;
+  }
 
   public static void main(String[] args) {
-    JFrame frame = new JFrame("Tetris");
-    frame.setContentPane(new Tetris().tetrisPanel);
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    frame.pack();
-    frame.setVisible(true);
-
-    Board board = new Board();
-    board.spawnTetromino();
-    /*System.out.println(board.getCurrentTetromino().toString());
-    board.getCurrentTetromino().rotateClockwise();
-    System.out.println(board.getCurrentTetromino().toString());
-    Tetromino novi = new Tetromino(board.getCurrentTetromino());
-    System.out.println(novi.toString());
-    novi.rotateClockwise();
-    System.out.println(novi.toString());
-    System.out.println(board.getCurrentTetromino().toString());*/
-
-    board.moveCurrentTetrominoDown();
-    System.out.println(board.getCurrentTetromino().toString());
-    board.moveCurrentTetrominoDown();
-    System.out.println(board.getCurrentTetromino().toString());
-    board.moveCurrentTetrominoDown();
-    System.out.println(board.getCurrentTetromino().toString());
-    board.moveCurrentTetrominoDown();
-    System.out.println(board.getCurrentTetromino().toString());
+    Tetris tetris = new Tetris();
+    tetris.setLocationRelativeTo(null);
+    tetris.setVisible(true);
   }
 }
