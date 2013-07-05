@@ -63,14 +63,20 @@ public class Board {
     }
   }
 
-  public void moveCurrentTetrominoDown() {
+  public boolean moveCurrentTetrominoDown() {
     Tetromino tetromino = currentTetromino.moveDown();
     if (isValidVerticalPosition(tetromino)) {
       currentTetromino = tetromino;
+      return true;
     } else {
       place(currentTetromino);
       spawnTetromino();
+      return false;
     }
+  }
+
+  public void dropCurrentTetrominoDown() {
+    while (moveCurrentTetrominoDown());
   }
 
   public void spawnTetromino() {
