@@ -63,6 +63,7 @@ public class BoardPanel extends JPanel implements ActionListener {
         case KeyEvent.VK_DOWN:
           board.moveCurrentTetrominoDown();
           repaint();
+          break;
         case KeyEvent.VK_SPACE:
           board.dropCurrentTetrominoDown();
           repaint();
