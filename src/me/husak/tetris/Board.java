@@ -1,8 +1,5 @@
 package me.husak.tetris;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private Tetromino currentTetromino, nextTetromino;
@@ -16,45 +13,63 @@ public class Board {
     spawnTetromino();
   }
 
-  public boolean validTetrominoPosition(Tetromino tetromino) {
+  public boolean isValidHorizontalPosition(Tetromino tetromino) {
     for (Block block : tetromino.getBlocks()) {
-      if (!validBlockPosition(block)) {
+      if (!isValidHorizontalPosition(block)) {
         return false;
       }
     }
     return true;
   }
 
-  private boolean validBlockPosition(Block block) {
+  private boolean isValidHorizontalPosition(Block block) {
     return !((block.getX() < 0) ||
-        (block.getY() < 0) ||
         (block.getX() > (WIDTH-1)) ||
+        (blocks[block.getY()][block.getX()] != null));
+  }
+
+  public boolean isValidVerticalPosition(Tetromino tetromino) {
+    for (Block block : tetromino.getBlocks()) {
+      if (!isValidVerticalPosition(block)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private boolean isValidVerticalPosition(Block block) {
+    return !((block.getY() < 0) ||
         (block.getY() > (HEIGHT-1)) ||
         (blocks[block.getY()][block.getX()] != null));
   }
 
-  public Tetromino getCurrentTetromino() {
-    return currentTetromino;
+  private void place(Tetromino tetromino) {
+    for (Block block : tetromino.getBlocks()) {
+      blocks[block.getY()][block.getX()] = block;
+    }
   }
 
   public void moveCurrentTetrominoLeft() {
     Tetromino tetromino = currentTetromino.moveLeft();
-    if (validTetrominoPosition(tetromino)) {
+    if (isValidHorizontalPosition(tetromino)) {
       currentTetromino = tetromino;
     }
   }
 
   public void moveCurrentTetrominoRight() {
     Tetromino tetromino = currentTetromino.moveRight();
-    if (validTetrominoPosition(tetromino)) {
+    if (isValidHorizontalPosition(tetromino)) {
       currentTetromino = tetromino;
     }
   }
 
   public void moveCurrentTetrominoDown() {
     Tetromino tetromino = currentTetromino.moveDown();
-    if (validTetrominoPosition(tetromino)) {
+    if (isValidVerticalPosition(tetromino)) {
       currentTetromino = tetromino;
+    } else {
+      place(currentTetromino);
+      spawnTetromino();
     }
   }
 
@@ -88,6 +103,14 @@ public class Board {
         return new LTetromino(0, 0);
     }
     return null;
+  }
+
+  public Tetromino getCurrentTetromino() {
+    return currentTetromino;
+  }
+
+  public Block[][] getBlocks() {
+    return blocks;
   }
 
   @Override

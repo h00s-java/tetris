@@ -24,6 +24,13 @@ public class BoardPanel extends JPanel implements ActionListener {
     for (Block block : board.getCurrentTetromino().getBlocks()) {
       drawBlock(block, g);
     }
+    for (int i = 0; i < Board.HEIGHT; i++) {
+      for (int j = 0; j < Board.WIDTH; j++) {
+        if (board.getBlocks()[i][j] != null) {
+          drawBlock(board.getBlocks()[i][j], g);
+        }
+      }
+    }
   }
 
   int blockWidth() { return (int) getSize().getWidth() / Board.WIDTH; }
