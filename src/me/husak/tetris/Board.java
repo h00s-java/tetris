@@ -24,7 +24,7 @@ public class Board {
 
   private boolean isValidHorizontalPosition(Block block) {
     return !((block.getX() < 0) ||
-        (block.getX() > (WIDTH-1)) ||
+        (block.getX() > (WIDTH - 1)) ||
         (blocks[block.getY()][block.getX()] != null));
   }
 
@@ -39,7 +39,7 @@ public class Board {
 
   private boolean isValidVerticalPosition(Block block) {
     return !((block.getY() < 0) ||
-        (block.getY() > (HEIGHT-1)) ||
+        (block.getY() > (HEIGHT - 1)) ||
         (blocks[block.getY()][block.getX()] != null));
   }
 
@@ -76,11 +76,9 @@ public class Board {
   public void spawnTetromino() {
     if (nextTetromino == null) {
       nextTetromino = createRandomTetromino();
-      currentTetromino = createRandomTetromino();
-    } else {
-      currentTetromino = nextTetromino;
-      nextTetromino = createRandomTetromino();
     }
+    currentTetromino = nextTetromino;
+    nextTetromino = createRandomTetromino();
     currentTetromino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
   }
 
