@@ -41,6 +41,10 @@ public class Tetris extends JFrame implements ActionListener {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   }
 
+  private void showClearedLines() {
+    statusBar.setText(Integer.toString(board.getClearedLines()));
+  }
+
   class TAdapter extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
       int keycode = e.getKeyCode();
@@ -60,12 +64,12 @@ public class Tetris extends JFrame implements ActionListener {
           break;
         case KeyEvent.VK_DOWN:
           board.moveCurrentTetrominoDown();
-          statusBar.setText(Integer.toString(board.getClearedLines()));
+          showClearedLines();
           boardPanel.repaint();
           break;
         case KeyEvent.VK_SPACE:
           board.dropCurrentTetrominoDown();
-          statusBar.setText(Integer.toString(board.getClearedLines()));
+          showClearedLines();
           boardPanel.repaint();
           break;
       }
@@ -75,6 +79,7 @@ public class Tetris extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     board.moveCurrentTetrominoDown();
+    showClearedLines();
     boardPanel.repaint();
   }
 
