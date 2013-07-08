@@ -17,8 +17,7 @@ public class Tetris extends JFrame implements ActionListener {
     statusBar = new JLabel("0");
     add(statusBar, BorderLayout.NORTH);
 
-    board = new Board();
-    boardPanel = new BoardPanel(board);
+    boardPanel = new BoardPanel(null);
     add(boardPanel);
 
     initUI();
@@ -26,7 +25,7 @@ public class Tetris extends JFrame implements ActionListener {
 
     addKeyListener(new TAdapter());
     timer = new Timer(1000, this);
-    timer.start();
+    initGame();
   }
 
   private void initUI() {
@@ -39,6 +38,24 @@ public class Tetris extends JFrame implements ActionListener {
     setSize(200, 480 + statusBar.getHeight());
     setTitle("Tetris");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+  }
+
+  private void start() {
+    timer.start();
+  }
+
+  private void pause() {
+    if (timer.isRunning()) {
+      timer.stop();
+    } else {
+      timer.start();
+    }
+  }
+
+  private void initGame() {
+    board = new Board();
+    boardPanel.setBoard(board);
+    start();
   }
 
   private void showClearedLines() {
@@ -78,12 +95,14 @@ public class Tetris extends JFrame implements ActionListener {
           showClearedLines();
           boardPanel.repaint();
           break;
-        case KeyEvent.VK_P:
-          if (timer.isRunning()) {
-            timer.stop();
-          } else {
-            timer.start();
+        case KeyEvent.VK_R:
+          int option = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?",  JOptionPane.YES_NO_OPTION);
+          if (option == JOptionPane.YES_OPTION) {
+            initGame();
           }
+          break;
+        case KeyEvent.VK_P:
+          pause();
           break;
       }
     }

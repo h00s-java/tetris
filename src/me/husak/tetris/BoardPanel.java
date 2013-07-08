@@ -42,4 +42,8 @@ public class BoardPanel extends JPanel {
     }
   }
 
+  public void setBoard(Board board) {
+    this.board = board;
+  }
+
 }
