@@ -14,7 +14,7 @@ public class Tetris extends JFrame implements ActionListener {
   private Timer timer;
 
   public Tetris() {
-    statusBar = new JLabel(" 0");
+    statusBar = new JLabel("0");
     add(statusBar, BorderLayout.NORTH);
 
     board = new Board();
