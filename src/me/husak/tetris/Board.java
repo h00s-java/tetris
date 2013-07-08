@@ -3,11 +3,13 @@ package me.husak.tetris;
 public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private Tetromino currentTetromino, nextTetromino;
+  private int clearedLines;
 
   public static final int HEIGHT = 22;
   public static final int WIDTH = 10;
 
   public Board() {
+    clearedLines = 0;
     spawnTetromino();
   }
 
@@ -58,12 +60,13 @@ public class Board {
 
   private void clearLines() {
     for (int i = 0; i < HEIGHT; i++) {
-      if (isLineFull(blocks[i])) {
-        for (int j = i; j < (HEIGHT - 1); j++) {
+      if (isLineFull(blocks[i])) { // if line is full
+        for (int j = i; j < (HEIGHT - 1); j++) { // move down all blocks on top of that line
           blocks[j] = blocks[j + 1];
         }
-        i--;
-        blocks[HEIGHT - 1] = new Block[WIDTH];
+        i--; // return to position where was line that was removed
+        clearedLines++;
+        blocks[HEIGHT - 1] = new Block[WIDTH]; // initialize new line on top
       }
     }
   }
@@ -146,6 +149,10 @@ public class Board {
 
   public Block[][] getBlocks() {
     return blocks;
+  }
+
+  public int getClearedLines() {
+    return clearedLines;
   }
 
   @Override

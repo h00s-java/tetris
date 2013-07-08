@@ -9,8 +9,8 @@ import java.awt.event.KeyEvent;
 
 public class Tetris extends JFrame implements ActionListener {
   private Board board;
-  private JLabel statusBar;
   private BoardPanel boardPanel;
+  private JLabel statusBar;
   private Timer timer;
 
   public Tetris() {
@@ -60,10 +60,12 @@ public class Tetris extends JFrame implements ActionListener {
           break;
         case KeyEvent.VK_DOWN:
           board.moveCurrentTetrominoDown();
+          statusBar.setText(Integer.toString(board.getClearedLines()));
           boardPanel.repaint();
           break;
         case KeyEvent.VK_SPACE:
           board.dropCurrentTetrominoDown();
+          statusBar.setText(Integer.toString(board.getClearedLines()));
           boardPanel.repaint();
           break;
       }
