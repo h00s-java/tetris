@@ -2,20 +2,31 @@ package me.husak.tetris;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class Tetris extends JFrame {
-
+public class Tetris extends JFrame implements ActionListener {
+  private Board board;
   private JLabel statusBar;
   private BoardPanel boardPanel;
+  private Timer timer;
 
   public Tetris() {
     statusBar = new JLabel(" 0");
     add(statusBar, BorderLayout.NORTH);
-    boardPanel = new BoardPanel(this);
+
+    board = new Board();
+    boardPanel = new BoardPanel(board);
     add(boardPanel);
-    //board.start();
 
     initUI();
+    setFocusable(true);
+
+    addKeyListener(new TAdapter());
+    timer = new Timer(1000, this);
+    timer.start();
   }
 
   private void initUI() {
@@ -26,17 +37,43 @@ public class Tetris extends JFrame {
     boardPanel.setBackground(Color.BLACK);
 
     setSize(200, 480 + statusBar.getHeight());
-    //boardPanel.setSize(200, 440);
     setTitle("Tetris");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   }
 
-  public JLabel getStatusBar() {
-    return statusBar;
+  class TAdapter extends KeyAdapter {
+    public void keyPressed(KeyEvent e) {
+      int keycode = e.getKeyCode();
+
+      switch (keycode) {
+        case KeyEvent.VK_LEFT:
+          board.moveCurrentTetrominoLeft();
+          boardPanel.repaint();
+          break;
+        case KeyEvent.VK_RIGHT:
+          board.moveCurrentTetrominoRight();
+          boardPanel.repaint();
+          break;
+        case KeyEvent.VK_UP:
+          board.rotateCurrentTetromino();
+          boardPanel.repaint();
+          break;
+        case KeyEvent.VK_DOWN:
+          board.moveCurrentTetrominoDown();
+          boardPanel.repaint();
+          break;
+        case KeyEvent.VK_SPACE:
+          board.dropCurrentTetrominoDown();
+          boardPanel.repaint();
+          break;
+      }
+    }
   }
 
-  public BoardPanel getBoardPanel() {
-    return boardPanel;
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    board.moveCurrentTetrominoDown();
+    boardPanel.repaint();
   }
 
   public static void main(String[] args) {
@@ -44,4 +81,5 @@ public class Tetris extends JFrame {
     tetris.setLocationRelativeTo(null);
     tetris.setVisible(true);
   }
+
 }

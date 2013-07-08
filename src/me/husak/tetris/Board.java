@@ -3,13 +3,11 @@ package me.husak.tetris;
 public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private Tetromino currentTetromino, nextTetromino;
-  private BoardPanel panel;
 
   public static final int HEIGHT = 22;
   public static final int WIDTH = 10;
 
-  public Board(BoardPanel boardPanel) {
-    this.panel = boardPanel;
+  public Board() {
     spawnTetromino();
   }
 

@@ -2,21 +2,12 @@ package me.husak.tetris;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
-public class BoardPanel extends JPanel implements ActionListener {
+public class BoardPanel extends JPanel {
   private Board board;
-  private Timer timer;
 
-  public BoardPanel(Tetris tetris) {
-    setFocusable(true);
-    board = new Board(this);
-    addKeyListener(new TAdapter());
-    timer = new Timer(1000, this);
-    timer.start();
+  public BoardPanel(Board board) {
+    this.board = board;
   }
 
   public void paint(Graphics g) {
@@ -47,41 +38,6 @@ public class BoardPanel extends JPanel implements ActionListener {
           g.setColor(board.getBlocks()[i][j].getColor());
           g.fillRect(j * blockWidth(), (Board.HEIGHT * blockHeight()) - (i * (blockHeight()) + blockHeight()), blockWidth(), blockHeight());
         }
-      }
-    }
-  }
-
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    board.moveCurrentTetrominoDown();
-    repaint();
-  }
-
-  class TAdapter extends KeyAdapter {
-    public void keyPressed(KeyEvent e) {
-      int keycode = e.getKeyCode();
-
-      switch (keycode) {
-        case KeyEvent.VK_LEFT:
-          board.moveCurrentTetrominoLeft();
-          repaint();
-          break;
-        case KeyEvent.VK_RIGHT:
-          board.moveCurrentTetrominoRight();
-          repaint();
-          break;
-        case KeyEvent.VK_UP:
-          board.rotateCurrentTetromino();
-          repaint();
-          break;
-        case KeyEvent.VK_DOWN:
-          board.moveCurrentTetrominoDown();
-          repaint();
-          break;
-        case KeyEvent.VK_SPACE:
-          board.dropCurrentTetrominoDown();
-          repaint();
-          break;
       }
     }
   }
