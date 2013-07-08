@@ -96,14 +96,19 @@ public class Tetris extends JFrame implements ActionListener {
           boardPanel.repaint();
           break;
         case KeyEvent.VK_R:
-          int option = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?",  JOptionPane.YES_NO_OPTION);
-          if (option == JOptionPane.YES_OPTION) {
+          int option_restart = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?",  JOptionPane.YES_NO_OPTION);
+          if (option_restart == JOptionPane.YES_OPTION) {
             initGame();
           }
           break;
         case KeyEvent.VK_P:
           pause();
           break;
+        case KeyEvent.VK_ESCAPE:
+          int option_exit = JOptionPane.showConfirmDialog(null, "Želite li završiti igru?", "Zatvoriti?",  JOptionPane.YES_NO_OPTION);
+          if (option_exit == JOptionPane.YES_OPTION) {
+            System.exit(0);
+          }
       }
     }
   }
