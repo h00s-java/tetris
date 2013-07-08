@@ -49,6 +49,27 @@ public class Board {
     }
   }
 
+  private boolean isLineFull(Block[] blocks) {
+    for (Block block : blocks) {
+      if (block == null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private void clearLines() {
+    for (int i = 0; i < HEIGHT; i++) {
+      if (isLineFull(blocks[i])) {
+        for (int j = i; j < (HEIGHT - 1); j++) {
+          blocks[j] = blocks[j + 1];
+        }
+        i--;
+        blocks[HEIGHT - 1] = new Block[WIDTH];
+      }
+    }
+  }
+
   public void moveCurrentTetrominoLeft() {
     Tetromino tetromino = currentTetromino.moveLeft();
     if (isValidHorizontalPosition(tetromino)) {
@@ -75,6 +96,16 @@ public class Board {
     }
   }
 
+  public boolean rotateCurrentTetromino() {
+    Tetromino tetromino = currentTetromino.rotateClockwise();
+    if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
+      currentTetromino = tetromino;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public void dropCurrentTetrominoDown() {
     while (moveCurrentTetrominoDown());
   }
@@ -82,6 +113,8 @@ public class Board {
   public void spawnTetromino() {
     if (nextTetromino == null) {
       nextTetromino = createRandomTetromino();
+    } else {
+      clearLines();
     }
     currentTetromino = nextTetromino;
     nextTetromino = createRandomTetromino();

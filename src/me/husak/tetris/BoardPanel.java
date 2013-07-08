@@ -11,7 +11,7 @@ public class BoardPanel extends JPanel implements ActionListener {
   private Board board;
   private Timer timer;
 
-  public BoardPanel(Tetris parent) {
+  public BoardPanel(Tetris tetris) {
     setFocusable(true);
     board = new Board(this);
     addKeyListener(new TAdapter());
@@ -24,21 +24,31 @@ public class BoardPanel extends JPanel implements ActionListener {
     for (Block block : board.getCurrentTetromino().getBlocks()) {
       drawBlock(block, g);
     }
-    for (int i = 0; i < Board.HEIGHT; i++) {
-      for (int j = 0; j < Board.WIDTH; j++) {
-        if (board.getBlocks()[i][j] != null) {
-          drawBlock(board.getBlocks()[i][j], g);
-        }
-      }
-    }
+    drawBoard(g);
   }
 
-  int blockWidth() { return (int) getSize().getWidth() / Board.WIDTH; }
-  int blockHeight() { return (int) getSize().getHeight() / Board.HEIGHT; }
+  int blockWidth() {
+    return (int) getSize().getWidth() / Board.WIDTH;
+  }
+
+  int blockHeight() {
+    return (int) getSize().getHeight() / Board.HEIGHT;
+  }
 
   private void drawBlock(Block block, Graphics g) {
     g.setColor(block.getColor());
     g.fillRect(block.getX() * blockWidth(), (Board.HEIGHT * blockHeight()) - (block.getY() * (blockHeight()) + blockHeight()), blockWidth(), blockHeight());
+  }
+
+  private void drawBoard(Graphics g) {
+    for (int i = 0; i < Board.HEIGHT; i++) {
+      for (int j = 0; j < Board.WIDTH; j++) {
+        if (board.getBlocks()[i][j] != null) {
+          g.setColor(board.getBlocks()[i][j].getColor());
+          g.fillRect(j * blockWidth(), (Board.HEIGHT * blockHeight()) - (i * (blockHeight()) + blockHeight()), blockWidth(), blockHeight());
+        }
+      }
+    }
   }
 
   @Override
@@ -60,6 +70,10 @@ public class BoardPanel extends JPanel implements ActionListener {
           board.moveCurrentTetrominoRight();
           repaint();
           break;
+        case KeyEvent.VK_UP:
+          board.rotateCurrentTetromino();
+          repaint();
+          break;
         case KeyEvent.VK_DOWN:
           board.moveCurrentTetrominoDown();
           repaint();
@@ -71,6 +85,5 @@ public class BoardPanel extends JPanel implements ActionListener {
       }
     }
   }
-
 
 }
