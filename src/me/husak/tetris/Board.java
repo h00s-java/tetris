@@ -4,12 +4,14 @@ public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private Tetromino currentTetromino, nextTetromino;
   private int clearedLines;
+  private boolean valid;
 
   public static final int HEIGHT = 22;
   public static final int WIDTH = 10;
 
   public Board() {
     clearedLines = 0;
+    valid = true;
     spawnTetromino();
   }
 
@@ -93,6 +95,9 @@ public class Board {
     } else {
       place(currentTetromino);
       spawnTetromino();
+      if (!isValidVerticalPosition(currentTetromino)) {
+        valid = false;
+      }
       return false;
     }
   }
@@ -149,6 +154,10 @@ public class Board {
 
   public Block[][] getBlocks() {
     return blocks;
+  }
+
+  public boolean isValid() {
+    return valid;
   }
 
   public int getClearedLines() {

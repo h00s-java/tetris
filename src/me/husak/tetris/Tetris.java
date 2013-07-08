@@ -45,6 +45,12 @@ public class Tetris extends JFrame implements ActionListener {
     statusBar.setText(Integer.toString(board.getClearedLines()));
   }
 
+  private void checkGameState() {
+    if (!board.isValid()) {
+      timer.stop();
+    }
+  }
+
   class TAdapter extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
       int keycode = e.getKeyCode();
@@ -87,6 +93,7 @@ public class Tetris extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     board.moveCurrentTetrominoDown();
     showClearedLines();
+    checkGameState();
     boardPanel.repaint();
   }
 
