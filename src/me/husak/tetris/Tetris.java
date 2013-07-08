@@ -72,6 +72,13 @@ public class Tetris extends JFrame implements ActionListener {
           showClearedLines();
           boardPanel.repaint();
           break;
+        case KeyEvent.VK_P:
+          if (timer.isRunning()) {
+            timer.stop();
+          } else {
+            timer.start();
+          }
+          break;
       }
     }
   }
