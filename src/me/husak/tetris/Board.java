@@ -51,15 +51,6 @@ public class Board {
     }
   }
 
-  private boolean isLineFull(Block[] blocks) {
-    for (Block block : blocks) {
-      if (block == null) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   private void clearLines() {
     for (int i = 0; i < HEIGHT; i++) {
       if (isLineFull(blocks[i])) { // if line is full
@@ -68,6 +59,15 @@ public class Board {
         clearedLines++;
       }
     }
+  }
+
+  private boolean isLineFull(Block[] blocks) {
+    for (Block block : blocks) {
+      if (block == null) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private void removeLineAt(int index) {
