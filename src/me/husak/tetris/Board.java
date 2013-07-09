@@ -63,14 +63,18 @@ public class Board {
   private void clearLines() {
     for (int i = 0; i < HEIGHT; i++) {
       if (isLineFull(blocks[i])) { // if line is full
-        for (int j = i; j < (HEIGHT - 1); j++) { // move down all blocks on top of that line
-          blocks[j] = blocks[j + 1];
-        }
+        removeLineAt(i);
         i--; // return to position where was line that was removed
         clearedLines++;
-        blocks[HEIGHT - 1] = new Block[WIDTH]; // initialize new line on top
       }
     }
+  }
+
+  private void removeLineAt(int index) {
+    for (int j = index; j < (HEIGHT - 1); j++) { // move down all blocks on top of that line
+      blocks[j] = blocks[j + 1];
+    }
+    blocks[HEIGHT - 1] = new Block[WIDTH]; // initialize new line on top
   }
 
   public void moveCurrentTetrominoLeft() {
