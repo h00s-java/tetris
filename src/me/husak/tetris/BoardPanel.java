@@ -33,11 +33,11 @@ public class BoardPanel extends JPanel {
 
   private void paintBoard(Graphics g) {
     g.setColor(Color.DARK_GRAY);
-    for (int i = 0; i < Board.WIDTH; i++) {
-      g.drawLine(i * blockWidth(), 0, i * blockWidth(), (int) getSize().getHeight());
+    for (int i = 0; i <= Board.WIDTH; i++) {
+      g.drawLine(i * blockWidth(), 0, i * blockWidth(), blockHeight() * board.HEIGHT);
     }
-    for (int i = 0; i < Board.HEIGHT; i++) {
-      g.drawLine(0, i * blockHeight(), (int) getSize().getWidth(), i * blockHeight());
+    for (int i = 0; i <= Board.HEIGHT; i++) {
+      g.drawLine(0, i * blockHeight(), blockWidth() * board.WIDTH, i * blockHeight());
     }
 
     for (int i = 0; i < Board.HEIGHT; i++) {

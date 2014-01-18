@@ -35,7 +35,8 @@ public class Tetris extends JFrame implements ActionListener {
 
     boardPanel.setBackground(Color.BLACK);
 
-    setSize(200, 480 + statusBar.getHeight());
+    boardPanel.setSize(200, 480);
+    setSize(boardPanel.getWidth(), boardPanel.getHeight() + statusBar.getHeight());
     setTitle("Tetris");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   }
@@ -96,7 +97,7 @@ public class Tetris extends JFrame implements ActionListener {
           boardPanel.repaint();
           break;
         case KeyEvent.VK_R:
-          int option_restart = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?",  JOptionPane.YES_NO_OPTION);
+          int option_restart = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?", JOptionPane.YES_NO_OPTION);
           if (option_restart == JOptionPane.YES_OPTION) {
             initGame();
           }
@@ -105,7 +106,7 @@ public class Tetris extends JFrame implements ActionListener {
           pause();
           break;
         case KeyEvent.VK_ESCAPE:
-          int option_exit = JOptionPane.showConfirmDialog(null, "Želite li završiti igru?", "Zatvoriti?",  JOptionPane.YES_NO_OPTION);
+          int option_exit = JOptionPane.showConfirmDialog(null, "Želite li završiti igru?", "Zatvoriti?", JOptionPane.YES_NO_OPTION);
           if (option_exit == JOptionPane.YES_OPTION) {
             System.exit(0);
           }
