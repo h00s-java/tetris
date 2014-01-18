@@ -5,6 +5,7 @@ public class Board {
   private Tetromino currentTetromino, nextTetromino;
   private int clearedLines;
   private boolean valid;
+  private BoardChangeListener boardChangeListener;
 
   public static final int HEIGHT = 22;
   public static final int WIDTH = 10;
@@ -13,6 +14,20 @@ public class Board {
     clearedLines = 0;
     valid = true;
     spawnTetromino();
+  }
+
+  public interface BoardChangeListener {
+    void onBoardChangeListener();
+  }
+
+  public void setBoardChangeListener(BoardChangeListener l) {
+    boardChangeListener = l;
+  }
+
+  public void notifyBoardChange() {
+    if (boardChangeListener != null) {
+      boardChangeListener.onBoardChangeListener();
+    }
   }
 
   public boolean isValidHorizontalPosition(Tetromino tetromino) {
@@ -75,12 +90,14 @@ public class Board {
       blocks[j] = blocks[j + 1];
     }
     blocks[HEIGHT - 1] = new Block[WIDTH]; // initialize new line on top
+    notifyBoardChange();
   }
 
   public void moveCurrentTetrominoLeft() {
     Tetromino tetromino = currentTetromino.moveLeft();
     if (isValidHorizontalPosition(tetromino)) {
       currentTetromino = tetromino;
+      notifyBoardChange();
     }
   }
 
@@ -88,6 +105,7 @@ public class Board {
     Tetromino tetromino = currentTetromino.moveRight();
     if (isValidHorizontalPosition(tetromino)) {
       currentTetromino = tetromino;
+      notifyBoardChange();
     }
   }
 
@@ -95,10 +113,12 @@ public class Board {
     Tetromino tetromino = currentTetromino.moveDown();
     if (isValidVerticalPosition(tetromino)) {
       currentTetromino = tetromino;
+      notifyBoardChange();
       return true;
     } else {
       place(currentTetromino);
       spawnTetromino();
+      notifyBoardChange();
       if (!isValidVerticalPosition(currentTetromino)) {
         valid = false;
       }
@@ -110,6 +130,7 @@ public class Board {
     Tetromino tetromino = currentTetromino.rotateClockwise();
     if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
       currentTetromino = tetromino;
+      notifyBoardChange();
       return true;
     } else {
       return false;

@@ -52,6 +52,12 @@ public class BoardPanel extends JPanel {
 
   public void setBoard(Board board) {
     this.board = board;
+    this.board.setBoardChangeListener(new Board.BoardChangeListener() {
+      @Override
+      public void onBoardChangeListener() {
+        repaint();
+      }
+    });
   }
 
 }

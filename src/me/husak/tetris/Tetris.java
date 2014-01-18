@@ -76,25 +76,20 @@ public class Tetris extends JFrame implements ActionListener {
       switch (keycode) {
         case KeyEvent.VK_LEFT:
           board.moveCurrentTetrominoLeft();
-          boardPanel.repaint();
           break;
         case KeyEvent.VK_RIGHT:
           board.moveCurrentTetrominoRight();
-          boardPanel.repaint();
           break;
         case KeyEvent.VK_UP:
           board.rotateCurrentTetromino();
-          boardPanel.repaint();
           break;
         case KeyEvent.VK_DOWN:
           board.moveCurrentTetrominoDown();
           showClearedLines();
-          boardPanel.repaint();
           break;
         case KeyEvent.VK_SPACE:
           board.dropCurrentTetrominoDown();
           showClearedLines();
-          boardPanel.repaint();
           break;
         case KeyEvent.VK_R:
           int option_restart = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?", JOptionPane.YES_NO_OPTION);
@@ -119,7 +114,6 @@ public class Tetris extends JFrame implements ActionListener {
     board.moveCurrentTetrominoDown();
     showClearedLines();
     checkGameState();
-    boardPanel.repaint();
   }
 
   public static void main(String[] args) {
