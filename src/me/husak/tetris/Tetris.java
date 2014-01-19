@@ -35,7 +35,7 @@ public class Tetris extends JFrame implements ActionListener {
 
     boardPanel.setBackground(Color.BLACK);
 
-    boardPanel.setSize(200, 480);
+    boardPanel.setSize(202, 467);
     setSize(boardPanel.getWidth(), boardPanel.getHeight() + statusBar.getHeight());
     setTitle("Tetris");
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
