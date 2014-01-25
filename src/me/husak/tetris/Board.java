@@ -55,8 +55,8 @@ public class Board {
   }
 
   private boolean isValidVerticalPosition(Block block) {
-    return !((block.getY() < 0) ||
-        (block.getY() > (HEIGHT - 1)) ||
+    return !((block.getY() < 0 || block.getX() < 0) ||
+        (block.getY() > (HEIGHT - 1) || block.getX() > (WIDTH - 1)) ||
         (blocks[block.getY()][block.getX()] != null));
   }
 

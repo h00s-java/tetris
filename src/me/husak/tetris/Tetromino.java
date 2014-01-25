@@ -67,12 +67,13 @@ public class Tetromino {
   }
 
   public Tetromino rotateClockwise() {
-    for (Block block : blocks) {
+    Tetromino tetromino = new Tetromino(this);
+    for (Block block : tetromino.getBlocks()) {
       block.subtractPoint(position);
       block.rotateClockwise();
       block.addPoint(position);
     }
-    return this;
+    return tetromino;
   }
 
   public Tetromino rotateCounterClockwise() {
