@@ -39,7 +39,7 @@ public class Tetromino {
 
   public Point[][] getOffsetData() {
     return offsetData;
-  };
+  }
 
   public int getRotationState() {
     return rotationState;
@@ -57,6 +57,15 @@ public class Tetromino {
   public Tetromino setPosition(int x, int y) {
     setPosition(new Point(x, y));
     return this;
+  }
+
+  public Tetromino offsetPosition(Point position) {
+    Tetromino tetromino = new Tetromino(this);
+    for (Block block : tetromino.getBlocks()) {
+      block.addPoint(position);
+    }
+    tetromino.position.addPoint(position);
+    return tetromino;
   }
 
   public Tetromino moveLeft() {
@@ -86,14 +95,19 @@ public class Tetromino {
     return tetromino;
   }
 
-  public Tetromino rotateClockwise() {
+  public Tetromino[] rotateClockwise() {
     Tetromino tetromino = new Tetromino(this);
     for (Block block : tetromino.getBlocks()) {
       block.subtractPoint(position);
       block.rotateClockwise();
       block.addPoint(position);
     }
-    return tetromino;
+    tetromino.rotationState = (tetromino.rotationState + 1) % 4;
+    Tetromino[] rotatedTetrominos = new Tetromino[offsetData[0].length];
+    for (int i = 0; i < rotatedTetrominos.length; i++) {
+      rotatedTetrominos[i] = tetromino.offsetPosition(new Point(offsetData[rotationState][i]).subtractPoint(offsetData[tetromino.rotationState][i]));
+    }
+    return rotatedTetrominos;
   }
 
   public Tetromino rotateCounterClockwise() {

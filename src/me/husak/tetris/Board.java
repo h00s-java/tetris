@@ -127,14 +127,15 @@ public class Board {
   }
 
   public boolean rotateCurrentTetromino() {
-    Tetromino tetromino = currentTetromino.rotateClockwise();
-    if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
-      currentTetromino = tetromino;
-      notifyBoardChange();
-      return true;
-    } else {
-      return false;
+    Tetromino tetrominos[] = currentTetromino.rotateClockwise();
+    for (Tetromino tetromino : tetrominos) {
+      if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
+        currentTetromino = tetromino;
+        notifyBoardChange();
+        return true;
+      }
     }
+    return false;
   }
 
   public void dropCurrentTetrominoDown() {
