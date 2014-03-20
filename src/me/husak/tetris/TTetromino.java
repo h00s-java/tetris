@@ -4,12 +4,20 @@ import java.awt.*;
 
 public class TTetromino extends Tetromino {
   public TTetromino(Point position) {
-    super(new Block[] {
-        new Block(-1,0, Color.PINK),
-        new Block(0,0, Color.PINK),
-        new Block(1,0, Color.PINK),
-        new Block(0,1, Color.PINK)
-    }, position);
+    super(new Block[]{
+            new Block(-1, 0, Color.PINK),
+            new Block(0, 0, Color.PINK),
+            new Block(1, 0, Color.PINK),
+            new Block(0, 1, Color.PINK)
+        },
+        position,
+        new Point[][]{
+            {new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0)},
+            {new Point(0, 0), new Point(1, 0), new Point(1, -1), new Point(0, 2), new Point(1, 2)},
+            {new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0)},
+            {new Point(0, 0), new Point(-1, 0), new Point(-1, -1), new Point(0, 2), new Point(-1, 2)},
+        }
+    );
   }
 
   public TTetromino(int x, int y) {
