@@ -126,8 +126,8 @@ public class Board {
     }
   }
 
-  public boolean rotateCurrentTetromino() {
-    Tetromino tetrominos[] = currentTetromino.rotateClockwise();
+  private boolean rotateCurrentTetromino(boolean clockwise) {
+    Tetromino tetrominos[] = (clockwise) ? currentTetromino.rotateClockwise() : currentTetromino.rotateCounterClockwise();
     for (Tetromino tetromino : tetrominos) {
       if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
         currentTetromino = tetromino;
@@ -136,6 +136,14 @@ public class Board {
       }
     }
     return false;
+  }
+
+  public boolean rotateCurrentTetrominoClockwise() {
+    return rotateCurrentTetromino(true);
+  }
+
+  public boolean rotateCurrentTetrominoCounterClockwise() {
+    return rotateCurrentTetromino(false);
   }
 
   public void dropCurrentTetrominoDown() {

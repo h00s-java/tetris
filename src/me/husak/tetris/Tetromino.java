@@ -95,14 +95,18 @@ public class Tetromino {
     return tetromino;
   }
 
-  public Tetromino[] rotateClockwise() {
+  private Tetromino[] rotate(boolean clockwise) {
     Tetromino tetromino = new Tetromino(this);
     for (Block block : tetromino.getBlocks()) {
       block.subtractPoint(position);
-      block.rotateClockwise();
+      if (clockwise) {
+        block.rotateClockwise();
+      } else {
+        block.rotateCounterClockwise();
+      }
       block.addPoint(position);
     }
-    tetromino.rotationState = (tetromino.rotationState + 1) % 4;
+    tetromino.rotationState = (clockwise) ? (tetromino.rotationState + 1) % 4 : (tetromino.rotationState + 3) % 4;
     Tetromino[] rotatedTetrominos = new Tetromino[offsetData[0].length];
     for (int i = 0; i < rotatedTetrominos.length; i++) {
       rotatedTetrominos[i] = tetromino.offsetPosition(new Point(offsetData[rotationState][i]).subtractPoint(offsetData[tetromino.rotationState][i]));
@@ -110,13 +114,12 @@ public class Tetromino {
     return rotatedTetrominos;
   }
 
-  public Tetromino rotateCounterClockwise() {
-    for (Block block : blocks) {
-      block.subtractPoint(position);
-      block.rotateCounterClockwise();
-      block.addPoint(position);
-    }
-    return this;
+  public Tetromino[] rotateClockwise() {
+    return rotate(true);
+  }
+
+  public Tetromino[] rotateCounterClockwise() {
+    return rotate(false);
   }
 
   @Override
@@ -126,6 +129,6 @@ public class Tetromino {
       output += block.toString() + ",";
     }
     return output + " @" + position.toString() + "]";
-  }                                               
+  }
 
 }
