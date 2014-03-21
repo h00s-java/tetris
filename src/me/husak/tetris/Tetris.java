@@ -30,8 +30,9 @@ public class Tetris extends JFrame implements ActionListener {
 
   private void initUI() {
     statusBar.setOpaque(true);
+    statusBar.setHorizontalAlignment(SwingConstants.CENTER);
     statusBar.setBackground(Color.BLACK);
-    statusBar.setForeground(Color.WHITE);
+    statusBar.setForeground(new Color(255,255,254));
 
     boardPanel.setBackground(Color.BLACK);
 

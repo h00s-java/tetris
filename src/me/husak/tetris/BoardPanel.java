@@ -5,6 +5,8 @@ import java.awt.*;
 
 public class BoardPanel extends JPanel {
   private Board board;
+  private int offsetX, offsetY;
+  private int blockSize;
 
   public BoardPanel(Board board) {
     this.board = board;
@@ -12,39 +14,36 @@ public class BoardPanel extends JPanel {
 
   public void paint(Graphics g) {
     super.paint(g);
+    int blockSizeX = (int) getSize().getHeight() / Board.HEIGHT;
+    int blockSizeY = (int) getSize().getWidth() / Board.WIDTH;
+    blockSize = (blockSizeX > blockSizeY) ? blockSizeY : blockSizeX;
+    offsetX = ((int) getSize().getWidth() - (Board.WIDTH * blockSize)) / 2;
+    offsetY = ((int) getSize().getHeight() - (Board.HEIGHT * blockSize)) / 2;
     paintBoard(g);
     for (Block block : board.getCurrentTetromino().getBlocks()) {
       paintBlock(block, g);
     }
   }
 
-  int blockWidth() {
-    return (int) getSize().getWidth() / Board.WIDTH;
-  }
-
-  int blockHeight() {
-    return (int) getSize().getHeight() / Board.HEIGHT;
-  }
-
   private void paintBlock(Block block, Graphics g) {
     g.setColor(block.getColor());
-    g.fillRect(block.getX() * blockWidth(), (Board.HEIGHT * blockHeight()) - (block.getY() * (blockHeight()) + blockHeight()), blockWidth(), blockHeight());
+    g.fillRect(block.getX() * blockSize + offsetX, (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
   }
 
   private void paintBoard(Graphics g) {
     g.setColor(Color.DARK_GRAY);
     for (int i = 0; i <= Board.WIDTH; i++) {
-      g.drawLine(i * blockWidth(), 0, i * blockWidth(), blockHeight() * board.HEIGHT);
+      g.drawLine(i * blockSize + offsetX, offsetY, i * blockSize + offsetX, blockSize * Board.HEIGHT + offsetY);
     }
     for (int i = 0; i <= Board.HEIGHT; i++) {
-      g.drawLine(0, i * blockHeight(), blockWidth() * board.WIDTH, i * blockHeight());
+      g.drawLine(offsetX, i * blockSize + offsetY, blockSize * Board.WIDTH + offsetX, i * blockSize + offsetY);
     }
 
     for (int i = 0; i < Board.HEIGHT; i++) {
       for (int j = 0; j < Board.WIDTH; j++) {
         if (board.getBlocks()[i][j] != null) {
           g.setColor(board.getBlocks()[i][j].getColor());
-          g.fillRect(j * blockWidth(), (Board.HEIGHT * blockHeight()) - (i * (blockHeight()) + blockHeight()), blockWidth(), blockHeight());
+          g.fillRect(j * blockSize + offsetX, (Board.HEIGHT * blockSize) - (i * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
         }
       }
     }
