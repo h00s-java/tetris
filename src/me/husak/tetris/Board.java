@@ -2,7 +2,7 @@ package me.husak.tetris;
 
 public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
-  private Tetromino currentTetromino, nextTetromino;
+  private Tetrimino currentTetrimino, nextTetrimino;
   private int clearedLines;
   private boolean valid;
   private BoardChangeListener boardChangeListener;
@@ -13,7 +13,7 @@ public class Board {
   public Board() {
     clearedLines = 0;
     valid = true;
-    spawnTetromino();
+    spawnTetrimino();
   }
 
   public interface BoardChangeListener {
@@ -30,8 +30,8 @@ public class Board {
     }
   }
 
-  public boolean isValidHorizontalPosition(Tetromino tetromino) {
-    for (Block block : tetromino.getBlocks()) {
+  public boolean isValidHorizontalPosition(Tetrimino tetrimino) {
+    for (Block block : tetrimino.getBlocks()) {
       if (!isValidHorizontalPosition(block)) {
         return false;
       }
@@ -45,8 +45,8 @@ public class Board {
         (blocks[block.getY()][block.getX()] != null));
   }
 
-  public boolean isValidVerticalPosition(Tetromino tetromino) {
-    for (Block block : tetromino.getBlocks()) {
+  public boolean isValidVerticalPosition(Tetrimino tetrimino) {
+    for (Block block : tetrimino.getBlocks()) {
       if (!isValidVerticalPosition(block)) {
         return false;
       }
@@ -60,8 +60,8 @@ public class Board {
         (blocks[block.getY()][block.getX()] != null));
   }
 
-  private void place(Tetromino tetromino) {
-    for (Block block : tetromino.getBlocks()) {
+  private void place(Tetrimino tetrimino) {
+    for (Block block : tetrimino.getBlocks()) {
       blocks[block.getY()][block.getX()] = block;
     }
   }
@@ -93,44 +93,44 @@ public class Board {
     notifyBoardChange();
   }
 
-  public void moveCurrentTetrominoLeft() {
-    Tetromino tetromino = currentTetromino.moveLeft();
-    if (isValidHorizontalPosition(tetromino)) {
-      currentTetromino = tetromino;
+  public void moveCurrentTetriminoLeft() {
+    Tetrimino tetrimino = currentTetrimino.moveLeft();
+    if (isValidHorizontalPosition(tetrimino)) {
+      currentTetrimino = tetrimino;
       notifyBoardChange();
     }
   }
 
-  public void moveCurrentTetrominoRight() {
-    Tetromino tetromino = currentTetromino.moveRight();
-    if (isValidHorizontalPosition(tetromino)) {
-      currentTetromino = tetromino;
+  public void moveCurrentTetriminoRight() {
+    Tetrimino tetrimino = currentTetrimino.moveRight();
+    if (isValidHorizontalPosition(tetrimino)) {
+      currentTetrimino = tetrimino;
       notifyBoardChange();
     }
   }
 
-  public boolean moveCurrentTetrominoDown() {
-    Tetromino tetromino = currentTetromino.moveDown();
-    if (isValidVerticalPosition(tetromino)) {
-      currentTetromino = tetromino;
+  public boolean moveCurrentTetriminoDown() {
+    Tetrimino tetrimino = currentTetrimino.moveDown();
+    if (isValidVerticalPosition(tetrimino)) {
+      currentTetrimino = tetrimino;
       notifyBoardChange();
       return true;
     } else {
-      place(currentTetromino);
-      spawnTetromino();
+      place(currentTetrimino);
+      spawnTetrimino();
       notifyBoardChange();
-      if (!isValidVerticalPosition(currentTetromino)) {
+      if (!isValidVerticalPosition(currentTetrimino)) {
         valid = false;
       }
       return false;
     }
   }
 
-  private boolean rotateCurrentTetromino(boolean clockwise) {
-    Tetromino tetrominos[] = (clockwise) ? currentTetromino.rotateClockwise() : currentTetromino.rotateCounterClockwise();
-    for (Tetromino tetromino : tetrominos) {
-      if (isValidVerticalPosition(tetromino) && isValidHorizontalPosition(tetromino)) {
-        currentTetromino = tetromino;
+  private boolean rotateCurrentTetrimino(boolean clockwise) {
+    Tetrimino tetriminos[] = (clockwise) ? currentTetrimino.rotateClockwise() : currentTetrimino.rotateCounterClockwise();
+    for (Tetrimino tetrimino : tetriminos) {
+      if (isValidVerticalPosition(tetrimino) && isValidHorizontalPosition(tetrimino)) {
+        currentTetrimino = tetrimino;
         notifyBoardChange();
         return true;
       }
@@ -138,52 +138,52 @@ public class Board {
     return false;
   }
 
-  public boolean rotateCurrentTetrominoClockwise() {
-    return rotateCurrentTetromino(true);
+  public boolean rotateCurrentTetriminoClockwise() {
+    return rotateCurrentTetrimino(true);
   }
 
-  public boolean rotateCurrentTetrominoCounterClockwise() {
-    return rotateCurrentTetromino(false);
+  public boolean rotateCurrentTetriminoCounterClockwise() {
+    return rotateCurrentTetrimino(false);
   }
 
-  public void dropCurrentTetrominoDown() {
-    while (moveCurrentTetrominoDown());
+  public void dropCurrentTetriminoDown() {
+    while (moveCurrentTetriminoDown());
   }
 
-  public void spawnTetromino() {
-    if (nextTetromino == null) {
-      nextTetromino = createRandomTetromino();
+  public void spawnTetrimino() {
+    if (nextTetrimino == null) {
+      nextTetrimino = createRandomTetrimino();
     } else {
       clearLines();
     }
-    currentTetromino = nextTetromino;
-    nextTetromino = createRandomTetromino();
-    currentTetromino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
+    currentTetrimino = nextTetrimino;
+    nextTetrimino = createRandomTetrimino();
+    currentTetrimino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
   }
 
-  private Tetromino createRandomTetromino() {
+  private Tetrimino createRandomTetrimino() {
     int random = (int) (Math.random() * 7);
     switch (random) {
       case 0:
-        return new ITetromino(0, 0);
+        return new ITetrimino(0, 0);
       case 1:
-        return new OTetromino(0, 0);
+        return new OTetrimino(0, 0);
       case 2:
-        return new TTetromino(0, 0);
+        return new TTetrimino(0, 0);
       case 3:
-        return new STetromino(0, 0);
+        return new STetrimino(0, 0);
       case 4:
-        return new ZTetromino(0, 0);
+        return new ZTetrimino(0, 0);
       case 5:
-        return new JTetromino(0, 0);
+        return new JTetrimino(0, 0);
       case 6:
-        return new LTetromino(0, 0);
+        return new LTetrimino(0, 0);
     }
     return null;
   }
 
-  public Tetromino getCurrentTetromino() {
-    return currentTetromino;
+  public Tetrimino getCurrentTetrimino() {
+    return currentTetrimino;
   }
 
   public Block[][] getBlocks() {

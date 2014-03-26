@@ -2,13 +2,13 @@ package me.husak.tetris;
 
 import java.awt.*;
 
-public class JTetromino extends Tetromino {
-  public JTetromino(Point position) {
+public class TTetrimino extends Tetrimino {
+  public TTetrimino(Point position) {
     super(new Block[]{
-            new Block(-1, 1, Color.BLUE),
-            new Block(-1, 0, Color.BLUE),
-            new Block(0, 0, Color.BLUE),
-            new Block(1, 0, Color.BLUE)
+            new Block(-1, 0, Color.PINK),
+            new Block(0, 0, Color.PINK),
+            new Block(1, 0, Color.PINK),
+            new Block(0, 1, Color.PINK)
         },
         position,
         new Point[][]{
@@ -20,12 +20,13 @@ public class JTetromino extends Tetromino {
     );
   }
 
-  public JTetromino(int x, int y) {
+  public TTetrimino(int x, int y) {
     this(new Point(x, y));
   }
 
   @Override
   public String toString() {
-    return "J: " + super.toString();
+    return "T: " + super.toString();
   }
+
 }

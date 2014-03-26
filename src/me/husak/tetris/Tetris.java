@@ -77,26 +77,26 @@ public class Tetris extends JFrame implements ActionListener {
       switch (keycode) {
         case KeyEvent.VK_LEFT:
         case KeyEvent.VK_NUMPAD4:
-          board.moveCurrentTetrominoLeft();
+          board.moveCurrentTetriminoLeft();
           break;
         case KeyEvent.VK_RIGHT:
         case KeyEvent.VK_NUMPAD6:
-          board.moveCurrentTetrominoRight();
+          board.moveCurrentTetriminoRight();
           break;
         case KeyEvent.VK_UP:
         case KeyEvent.VK_NUMPAD9:
-          board.rotateCurrentTetrominoClockwise();
+          board.rotateCurrentTetriminoClockwise();
           break;
         case KeyEvent.VK_NUMPAD7:
-          board.rotateCurrentTetrominoCounterClockwise();
+          board.rotateCurrentTetriminoCounterClockwise();
           break;
         case KeyEvent.VK_DOWN:
         case KeyEvent.VK_NUMPAD5:
-          board.moveCurrentTetrominoDown();
+          board.moveCurrentTetriminoDown();
           showClearedLines();
           break;
         case KeyEvent.VK_SPACE:
-          board.dropCurrentTetrominoDown();
+          board.dropCurrentTetriminoDown();
           showClearedLines();
           break;
         case KeyEvent.VK_R:
@@ -119,7 +119,7 @@ public class Tetris extends JFrame implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    board.moveCurrentTetrominoDown();
+    board.moveCurrentTetriminoDown();
     showClearedLines();
     checkGameState();
   }
