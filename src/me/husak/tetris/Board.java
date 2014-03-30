@@ -2,7 +2,8 @@ package me.husak.tetris;
 
 public class Board {
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
-  private Tetrimino currentTetrimino, nextTetrimino;
+  private RandomGenerator randomGenerator;
+  private Tetrimino currentTetrimino;
   private int clearedLines;
   private boolean valid;
   private BoardChangeListener boardChangeListener;
@@ -13,6 +14,7 @@ public class Board {
   public Board() {
     clearedLines = 0;
     valid = true;
+    randomGenerator = new RandomGenerator();
     spawnTetrimino();
   }
 
@@ -117,6 +119,7 @@ public class Board {
       return true;
     } else {
       place(currentTetrimino);
+      clearLines();
       spawnTetrimino();
       notifyBoardChange();
       if (!isValidVerticalPosition(currentTetrimino)) {
@@ -151,35 +154,8 @@ public class Board {
   }
 
   public void spawnTetrimino() {
-    if (nextTetrimino == null) {
-      nextTetrimino = createRandomTetrimino();
-    } else {
-      clearLines();
-    }
-    currentTetrimino = nextTetrimino;
-    nextTetrimino = createRandomTetrimino();
+    currentTetrimino = randomGenerator.nextTetrimino();
     currentTetrimino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
-  }
-
-  private Tetrimino createRandomTetrimino() {
-    int random = (int) (Math.random() * 7);
-    switch (random) {
-      case 0:
-        return new ITetrimino(0, 0);
-      case 1:
-        return new OTetrimino(0, 0);
-      case 2:
-        return new TTetrimino(0, 0);
-      case 3:
-        return new STetrimino(0, 0);
-      case 4:
-        return new ZTetrimino(0, 0);
-      case 5:
-        return new JTetrimino(0, 0);
-      case 6:
-        return new LTetrimino(0, 0);
-    }
-    return null;
   }
 
   public Tetrimino getCurrentTetrimino() {
