@@ -69,30 +69,15 @@ public class Tetrimino {
   }
 
   public Tetrimino moveLeft() {
-    Tetrimino tetrimino = new Tetrimino(this);
-    for (Block block : tetrimino.getBlocks()) {
-      block.setX(block.getX() - 1);
-    }
-    tetrimino.getPosition().setCoordinates(tetrimino.getPosition().getX() - 1, tetrimino.getPosition().getY());
-    return tetrimino;
+    return offsetPosition(new Point(-1, 0));
   }
 
   public Tetrimino moveRight() {
-    Tetrimino tetrimino = new Tetrimino(this);
-    for (Block block : tetrimino.getBlocks()) {
-      block.setX(block.getX() + 1);
-    }
-    tetrimino.getPosition().setCoordinates(tetrimino.getPosition().getX() + 1, tetrimino.getPosition().getY());
-    return tetrimino;
+    return offsetPosition(new Point(1, 0));
   }
 
   public Tetrimino moveDown() {
-    Tetrimino tetrimino = new Tetrimino(this);
-    for (Block block : tetrimino.getBlocks()) {
-      block.setY(block.getY() - 1);
-    }
-    tetrimino.getPosition().setCoordinates(tetrimino.getPosition().getX(), tetrimino.getPosition().getY() - 1);
-    return tetrimino;
+    return offsetPosition(new Point(0, -1));
   }
 
   private Tetrimino[] rotate(boolean clockwise) {
