@@ -1,9 +1,11 @@
 package me.husak.tetris;
 
 public class Board {
+  // TODO: add ghost piece
+  // TODO: add next piece
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private RandomGenerator randomGenerator;
-  private Tetrimino currentTetrimino;
+  private Tetrimino currentTetrimino;//, ghostTetrimino;
   private int clearedLines;
   private boolean valid;
   private BoardChangeListener boardChangeListener;
@@ -95,6 +97,27 @@ public class Board {
     notifyBoardChange();
   }
 
+  private Point getDropPositionOf(Tetrimino tetrimino) {
+    /*for (int i = 0; i < tetrimino.getPosition().getY(); i++) {
+      if (blocks[i][tetrimino.getPosition().getX()] == null) {
+        boolean validPosition = true;
+        for (Block block : tetrimino.getBlocks()) {
+          if (blocks[block.getY()][block.getX()] != null) {
+            validPosition = false;
+            break;
+          }
+        }
+        if (validPosition) {
+          return new Point(i, tetrimino.getPosition().getX());
+        }
+      }
+    }*/
+    for (int i = tetrimino.getPosition().getY(); i >= 0; i--) {
+
+    }
+    return tetrimino.getPosition();
+  }
+
   public void moveCurrentTetriminoLeft() {
     Tetrimino tetrimino = currentTetrimino.moveLeft();
     if (isValidHorizontalPosition(tetrimino)) {
@@ -150,11 +173,13 @@ public class Board {
   }
 
   public void dropCurrentTetriminoDown() {
+    //Point dropPosition = getDropPositionOf(currentTetrimino);
     while (moveCurrentTetriminoDown());
   }
 
   public void spawnTetrimino() {
     currentTetrimino = randomGenerator.nextTetrimino();
+    //ghostTetrimino = new Tetrimino(currentTetrimino);
     currentTetrimino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
   }
 

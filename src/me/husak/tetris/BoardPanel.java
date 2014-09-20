@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardPanel extends JPanel {
+  // TODO: add javaFX
   private Board board;
   private int offsetX, offsetY;
   private int blockSize;
