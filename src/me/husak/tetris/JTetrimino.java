@@ -2,7 +2,7 @@ package me.husak.tetris;
 
 import java.awt.*;
 
-public class JTetrimino extends Tetrimino {
+public final class JTetrimino extends Tetrimino {
   public JTetrimino(Point position) {
     super(new Block[]{
             new Block(-1, 1, Color.BLUE),
