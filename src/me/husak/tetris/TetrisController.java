@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TetrisController extends JFrame implements ActionListener {
+public final class TetrisController extends JFrame implements ActionListener {
   private Board board;
   private BoardPanel boardPanel;
   private JLabel statusBar;

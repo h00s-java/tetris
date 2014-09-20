@@ -26,10 +26,10 @@ public class RandomGenerator {
   }
 
   private void randomizeSetAt(int index) {
-    int maxIndex = index + SET_SIZE;
+    final Random random = new Random();
+    final int maxIndex = index + SET_SIZE;
     int randomIndex;
     Tetrimino temp;
-    Random random = new Random();
 
     initializeSetAt(index);
     for (int i = maxIndex - 1; i > index; i--) {

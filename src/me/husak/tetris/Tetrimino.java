@@ -60,7 +60,7 @@ public class Tetrimino {
   }
 
   public Tetrimino offsetPosition(Point position) {
-    Tetrimino tetrimino = new Tetrimino(this);
+    final Tetrimino tetrimino = new Tetrimino(this);
     for (Block block : tetrimino.getBlocks()) {
       block.addPoint(position);
     }
@@ -81,7 +81,7 @@ public class Tetrimino {
   }
 
   private Tetrimino[] rotate(boolean clockwise) {
-    Tetrimino tetrimino = new Tetrimino(this);
+    final Tetrimino tetrimino = new Tetrimino(this);
     for (Block block : tetrimino.getBlocks()) {
       block.subtractPoint(position);
       if (clockwise) {
@@ -92,7 +92,7 @@ public class Tetrimino {
       block.addPoint(position);
     }
     tetrimino.rotationState = (clockwise) ? (tetrimino.rotationState + 1) % 4 : (tetrimino.rotationState + 3) % 4;
-    Tetrimino[] rotatedTetriminos = new Tetrimino[offsetData[0].length];
+    final Tetrimino[] rotatedTetriminos = new Tetrimino[offsetData[0].length];
     for (int i = 0; i < rotatedTetriminos.length; i++) {
       rotatedTetriminos[i] = tetrimino.offsetPosition(new Point(offsetData[rotationState][i]).subtractPoint(offsetData[tetrimino.rotationState][i]));
     }

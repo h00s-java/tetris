@@ -4,7 +4,7 @@ public class Board {
   // TODO: add ghost piece
   // TODO: add next piece
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
-  private RandomGenerator randomGenerator;
+  private final RandomGenerator randomGenerator;
   private Tetrimino currentTetrimino;//, ghostTetrimino;
   private int clearedLines;
   private boolean valid;
@@ -119,7 +119,7 @@ public class Board {
   }
 
   public void moveCurrentTetriminoLeft() {
-    Tetrimino tetrimino = currentTetrimino.moveLeft();
+    final Tetrimino tetrimino = currentTetrimino.moveLeft();
     if (isValidHorizontalPosition(tetrimino)) {
       currentTetrimino = tetrimino;
       notifyBoardChange();
@@ -127,7 +127,7 @@ public class Board {
   }
 
   public void moveCurrentTetriminoRight() {
-    Tetrimino tetrimino = currentTetrimino.moveRight();
+    final Tetrimino tetrimino = currentTetrimino.moveRight();
     if (isValidHorizontalPosition(tetrimino)) {
       currentTetrimino = tetrimino;
       notifyBoardChange();
@@ -135,7 +135,7 @@ public class Board {
   }
 
   public boolean moveCurrentTetriminoDown() {
-    Tetrimino tetrimino = currentTetrimino.moveDown();
+    final Tetrimino tetrimino = currentTetrimino.moveDown();
     if (isValidVerticalPosition(tetrimino)) {
       currentTetrimino = tetrimino;
       notifyBoardChange();
@@ -153,7 +153,7 @@ public class Board {
   }
 
   private boolean rotateCurrentTetrimino(boolean clockwise) {
-    Tetrimino tetriminos[] = (clockwise) ? currentTetrimino.rotateClockwise() : currentTetrimino.rotateCounterClockwise();
+    final Tetrimino tetriminos[] = (clockwise) ? currentTetrimino.rotateClockwise() : currentTetrimino.rotateCounterClockwise();
     for (Tetrimino tetrimino : tetriminos) {
       if (isValidVerticalPosition(tetrimino) && isValidHorizontalPosition(tetrimino)) {
         currentTetrimino = tetrimino;
