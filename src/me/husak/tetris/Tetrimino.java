@@ -1,7 +1,7 @@
 package me.husak.tetris;
 
 public class Tetrimino {
-  private Block[] blocks;
+  protected Block[] blocks;
   private Point[][] offsetData;
   private Point position;
   private int rotationState;

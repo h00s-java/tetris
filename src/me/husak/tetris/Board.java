@@ -5,7 +5,7 @@ public class Board {
   // TODO: add next piece
   private Block[][] blocks = new Block[HEIGHT][WIDTH];
   private final RandomGenerator randomGenerator;
-  private Tetrimino currentTetrimino;//, ghostTetrimino;
+  private Tetrimino currentTetrimino, ghostTetrimino;
   private int clearedLines;
   private boolean valid;
   private BoardChangeListener boardChangeListener;
@@ -34,7 +34,7 @@ public class Board {
     }
   }
 
-  public boolean isValidHorizontalPosition(Tetrimino tetrimino) {
+  private boolean isValidHorizontalPosition(Tetrimino tetrimino) {
     for (Block block : tetrimino.getBlocks()) {
       if (!isValidHorizontalPosition(block)) {
         return false;
@@ -49,7 +49,7 @@ public class Board {
         (blocks[block.getY()][block.getX()] != null));
   }
 
-  public boolean isValidVerticalPosition(Tetrimino tetrimino) {
+  private boolean isValidVerticalPosition(Tetrimino tetrimino) {
     for (Block block : tetrimino.getBlocks()) {
       if (!isValidVerticalPosition(block)) {
         return false;
@@ -97,31 +97,22 @@ public class Board {
     notifyBoardChange();
   }
 
-  private Point getDropPositionOf(Tetrimino tetrimino) {
-    /*for (int i = 0; i < tetrimino.getPosition().getY(); i++) {
-      if (blocks[i][tetrimino.getPosition().getX()] == null) {
-        boolean validPosition = true;
-        for (Block block : tetrimino.getBlocks()) {
-          if (blocks[block.getY()][block.getX()] != null) {
-            validPosition = false;
-            break;
-          }
-        }
-        if (validPosition) {
-          return new Point(i, tetrimino.getPosition().getX());
-        }
+  private void updateGhostTetrimino() {
+    ghostTetrimino = new GhostTetrimino(currentTetrimino);
+    for (int i = ghostTetrimino.getPosition().getY() - 1; i >= 0; i--) {
+      ghostTetrimino.setPosition(ghostTetrimino.getPosition().getX(), i);
+      if (!isValidVerticalPosition(ghostTetrimino)) {
+        ghostTetrimino.setPosition(ghostTetrimino.getPosition().getX(), i + 1);
+        break;
       }
-    }*/
-    for (int i = tetrimino.getPosition().getY(); i >= 0; i--) {
-
     }
-    return tetrimino.getPosition();
   }
 
   public void moveCurrentTetriminoLeft() {
     final Tetrimino tetrimino = currentTetrimino.moveLeft();
     if (isValidHorizontalPosition(tetrimino)) {
       currentTetrimino = tetrimino;
+      updateGhostTetrimino();
       notifyBoardChange();
     }
   }
@@ -130,6 +121,7 @@ public class Board {
     final Tetrimino tetrimino = currentTetrimino.moveRight();
     if (isValidHorizontalPosition(tetrimino)) {
       currentTetrimino = tetrimino;
+      updateGhostTetrimino();
       notifyBoardChange();
     }
   }
@@ -157,6 +149,7 @@ public class Board {
     for (Tetrimino tetrimino : tetriminos) {
       if (isValidVerticalPosition(tetrimino) && isValidHorizontalPosition(tetrimino)) {
         currentTetrimino = tetrimino;
+        updateGhostTetrimino();
         notifyBoardChange();
         return true;
       }
@@ -173,18 +166,21 @@ public class Board {
   }
 
   public void dropCurrentTetriminoDown() {
-    //Point dropPosition = getDropPositionOf(currentTetrimino);
     while (moveCurrentTetriminoDown());
   }
 
   public void spawnTetrimino() {
     currentTetrimino = randomGenerator.nextTetrimino();
-    //ghostTetrimino = new Tetrimino(currentTetrimino);
     currentTetrimino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
+    updateGhostTetrimino();
   }
 
   public Tetrimino getCurrentTetrimino() {
     return currentTetrimino;
+  }
+
+  public Tetrimino getGhostTetrimino() {
+    return ghostTetrimino;
   }
 
   public Block[][] getBlocks() {

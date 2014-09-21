@@ -21,6 +21,9 @@ public class BoardPanel extends JPanel {
     offsetX = ((int) getSize().getWidth() - (Board.WIDTH * blockSize)) / 2;
     offsetY = ((int) getSize().getHeight() - (Board.HEIGHT * blockSize)) / 2;
     paintBoard(g);
+    for (Block block : board.getGhostTetrimino().getBlocks()) {
+      paintBlock(block, g);
+    }
     for (Block block : board.getCurrentTetrimino().getBlocks()) {
       paintBlock(block, g);
     }
