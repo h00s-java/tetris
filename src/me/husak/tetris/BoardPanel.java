@@ -21,17 +21,25 @@ public class BoardPanel extends JPanel {
     offsetX = ((int) getSize().getWidth() - (Board.WIDTH * blockSize)) / 2;
     offsetY = ((int) getSize().getHeight() - (Board.HEIGHT * blockSize)) / 2;
     paintBoard(g);
-    for (Block block : board.getGhostTetrimino().getBlocks()) {
-      paintBlock(block, g);
-    }
-    for (Block block : board.getCurrentTetrimino().getBlocks()) {
-      paintBlock(block, g);
-    }
+    paintTetrimino(board.getGhostTetrimino(), 0.35f, g);
+    paintTetrimino(board.getCurrentTetrimino(), 1.0f, g);
   }
 
   private void paintBlock(Block block, Graphics g) {
-    g.setColor(block.getColor());
     g.fillRect(block.getX() * blockSize + offsetX, (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
+  }
+
+  private void paintTetrimino(Tetrimino tetrimino, float brightness, Graphics g) {
+    // brightness in range [0, 1]
+    if (brightness < 1.0f) {
+      final float hsbVals[] = Color.RGBtoHSB(tetrimino.getBlocks()[0].getColor().getRed(), tetrimino.getBlocks()[0].getColor().getGreen(), tetrimino.getBlocks()[0].getColor().getBlue(), null);
+      g.setColor(Color.getHSBColor(hsbVals[0], hsbVals[1], brightness * hsbVals[2]));
+    } else {
+      g.setColor(tetrimino.getBlocks()[0].getColor());
+    }
+    for (Block block : tetrimino.getBlocks()) {
+      paintBlock(block, g);
+    }
   }
 
   private void paintBoard(Graphics g) {

@@ -98,7 +98,7 @@ public class Board {
   }
 
   private void updateGhostTetrimino() {
-    ghostTetrimino = new GhostTetrimino(currentTetrimino);
+    ghostTetrimino = new Tetrimino(currentTetrimino);
     for (int i = ghostTetrimino.getPosition().getY() - 1; i >= 0; i--) {
       ghostTetrimino.setPosition(ghostTetrimino.getPosition().getX(), i);
       if (!isValidVerticalPosition(ghostTetrimino)) {
