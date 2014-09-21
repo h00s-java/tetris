@@ -26,7 +26,29 @@ public class BoardPanel extends JPanel {
   }
 
   private void paintBlock(Block block, Graphics g) {
+    final Color color = g.getColor();
     g.fillRect(block.getX() * blockSize + offsetX, (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
+
+    g.setColor(color.brighter());
+    g.drawLine(block.getX() * blockSize + offsetX,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY + blockSize - 1,
+        block.getX() * blockSize + offsetX,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY);
+    g.drawLine(block.getX() * blockSize + offsetX,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY,
+        block.getX() * blockSize + offsetX + blockSize - 1,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY);
+
+    g.setColor(color.darker());
+    g.drawLine(block.getX() * blockSize + offsetX + 1,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY + blockSize - 1,
+        block.getX() * blockSize + offsetX + blockSize - 1,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY + blockSize - 1);
+    g.drawLine(block.getX() * blockSize + offsetX + blockSize - 1,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY + blockSize - 1,
+        block.getX() * blockSize + offsetX + blockSize - 1,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY + 1);
+    g.setColor(color);
   }
 
   private void paintTetrimino(Tetrimino tetrimino, float brightness, Graphics g) {
@@ -55,7 +77,7 @@ public class BoardPanel extends JPanel {
       for (int j = 0; j < Board.WIDTH; j++) {
         if (board.getBlocks()[i][j] != null) {
           g.setColor(board.getBlocks()[i][j].getColor());
-          g.fillRect(j * blockSize + offsetX, (Board.HEIGHT * blockSize) - (i * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
+          paintBlock(board.getBlocks()[i][j], g);
         }
       }
     }

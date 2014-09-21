@@ -92,6 +92,11 @@ public class Board {
   private void removeLineAt(int index) {
     for (int j = index; j < (HEIGHT - 1); j++) { // move down all blocks on top of that line
       blocks[j] = blocks[j + 1];
+      for (Block block : blocks[j]) { // update Y position on all block in that line (move down)
+        if (block != null) {
+          block.setY(block.getY() - 1);
+        }
+      }
     }
     blocks[HEIGHT - 1] = new Block[WIDTH]; // initialize new line on top
     notifyBoardChange();
