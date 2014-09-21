@@ -5,10 +5,10 @@ import java.awt.*;
 public final class OTetrimino extends Tetrimino {
   public OTetrimino(Point position) {
     super(new Block[]{
-            new Block(0, 0, Color.YELLOW),
-            new Block(0, 1, Color.YELLOW),
-            new Block(1, 0, Color.YELLOW),
-            new Block(1, 1, Color.YELLOW)
+            new Block(0, 0, new Color(255, 196, 42)),
+            new Block(0, 1, new Color(255, 196, 42)),
+            new Block(1, 0, new Color(255, 196, 42)),
+            new Block(1, 1, new Color(255, 196, 42))
         },
         position,
         new Point[][]{

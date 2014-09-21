@@ -5,10 +5,10 @@ import java.awt.*;
 public final class ZTetrimino extends Tetrimino {
   public ZTetrimino(Point position) {
     super(new Block[]{
-            new Block(-1, 1, Color.RED),
-            new Block(0, 1, Color.RED),
-            new Block(0, 0, Color.RED),
-            new Block(1, 0, Color.RED)
+            new Block(-1, 1, new Color(250, 30, 30)),
+            new Block(0, 1, new Color(250, 30, 30)),
+            new Block(0, 0, new Color(250, 30, 30)),
+            new Block(1, 0, new Color(250, 30, 30))
         },
         position,
         new Point[][]{
