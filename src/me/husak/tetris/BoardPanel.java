@@ -27,7 +27,8 @@ public class BoardPanel extends JPanel {
 
   private void paintBlock(Block block, Graphics g) {
     final Color color = g.getColor();
-    g.fillRect(block.getX() * blockSize + offsetX, (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
+    g.fillRect(block.getX() * blockSize + offsetX,
+        (Board.HEIGHT * blockSize) - (block.getY() * (blockSize) + blockSize) + offsetY, blockSize, blockSize);
 
     g.setColor(color.brighter());
     g.drawLine(block.getX() * blockSize + offsetX,
@@ -54,7 +55,8 @@ public class BoardPanel extends JPanel {
   private void paintTetrimino(Tetrimino tetrimino, float brightness, Graphics g) {
     // brightness in range [0, 1]
     if (brightness < 1.0f) {
-      final float hsbVals[] = Color.RGBtoHSB(tetrimino.getBlocks()[0].getColor().getRed(), tetrimino.getBlocks()[0].getColor().getGreen(), tetrimino.getBlocks()[0].getColor().getBlue(), null);
+      final float hsbVals[] = Color.RGBtoHSB(tetrimino.getBlocks()[0].getColor().getRed(),
+          tetrimino.getBlocks()[0].getColor().getGreen(), tetrimino.getBlocks()[0].getColor().getBlue(), null);
       g.setColor(Color.getHSBColor(hsbVals[0], hsbVals[1], brightness * hsbVals[2]));
     } else {
       g.setColor(tetrimino.getBlocks()[0].getColor());
@@ -92,5 +94,4 @@ public class BoardPanel extends JPanel {
       }
     });
   }
-
 }

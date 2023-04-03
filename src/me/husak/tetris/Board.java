@@ -150,7 +150,8 @@ public class Board {
   }
 
   private boolean rotateCurrentTetrimino(boolean clockwise) {
-    final Tetrimino tetriminos[] = (clockwise) ? currentTetrimino.rotateClockwise() : currentTetrimino.rotateCounterClockwise();
+    final Tetrimino tetriminos[] = (clockwise) ? currentTetrimino.rotateClockwise()
+        : currentTetrimino.rotateCounterClockwise();
     for (Tetrimino tetrimino : tetriminos) {
       if (isValidVerticalPosition(tetrimino) && isValidHorizontalPosition(tetrimino)) {
         currentTetrimino = tetrimino;

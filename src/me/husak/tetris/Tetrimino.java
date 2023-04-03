@@ -94,7 +94,8 @@ public class Tetrimino {
     tetrimino.rotationState = (clockwise) ? (tetrimino.rotationState + 1) % 4 : (tetrimino.rotationState + 3) % 4;
     final Tetrimino[] rotatedTetriminos = new Tetrimino[offsetData[0].length];
     for (int i = 0; i < rotatedTetriminos.length; i++) {
-      rotatedTetriminos[i] = tetrimino.offsetPosition(new Point(offsetData[rotationState][i]).subtractPoint(offsetData[tetrimino.rotationState][i]));
+      rotatedTetriminos[i] = tetrimino.offsetPosition(
+          new Point(offsetData[rotationState][i]).subtractPoint(offsetData[tetrimino.rotationState][i]));
     }
     return rotatedTetriminos;
   }
@@ -115,5 +116,4 @@ public class Tetrimino {
     }
     return output + " @" + position.toString() + "]";
   }
-
 }
