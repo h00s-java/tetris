@@ -16,13 +16,13 @@ public class RandomGenerator {
 
   private void initializeSetAt(int index) {
     // I, J, L, O, S, T, Z
-    bag[index++] = new ITetrimino(0, 0);
-    bag[index++] = new JTetrimino(0, 0);
-    bag[index++] = new LTetrimino(0, 0);
-    bag[index++] = new OTetrimino(0, 0);
-    bag[index++] = new STetrimino(0, 0);
-    bag[index++] = new TTetrimino(0, 0);
-    bag[index] = new ZTetrimino(0, 0);
+    bag[index++] = new TetriminoI(0, 0);
+    bag[index++] = new TetriminoJ(0, 0);
+    bag[index++] = new TetriminoL(0, 0);
+    bag[index++] = new TetriminoO(0, 0);
+    bag[index++] = new TetriminoS(0, 0);
+    bag[index++] = new TetriminoT(0, 0);
+    bag[index] = new TetriminoZ(0, 0);
   }
 
   private void randomizeSetAt(int index) {

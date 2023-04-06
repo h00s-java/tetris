@@ -2,8 +2,8 @@ package me.husak.tetris;
 
 import java.awt.*;
 
-public final class ITetrimino extends Tetrimino {
-  public ITetrimino(Point position) {
+public final class TetriminoI extends Tetrimino {
+  public TetriminoI(Point position) {
     super(new Block[] {
         new Block(-1, 0, new Color(29, 183, 237)),
         new Block(0, 0, new Color(29, 183, 237)),
@@ -19,7 +19,7 @@ public final class ITetrimino extends Tetrimino {
         });
   }
 
-  public ITetrimino(int x, int y) {
+  public TetriminoI(int x, int y) {
     this(new Point(x, y));
   }
 
