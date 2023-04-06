@@ -100,7 +100,7 @@ public final class TetrisController extends JFrame implements ActionListener {
           showClearedLines();
           break;
         case KeyEvent.VK_R:
-          int option_restart = JOptionPane.showConfirmDialog(null, "Želite li ponovno pokrenuti igru?", "Ponovo?",
+          int option_restart = JOptionPane.showConfirmDialog(null, "Would you like to restart the game?", "Restart?",
               JOptionPane.YES_NO_OPTION);
           if (option_restart == JOptionPane.YES_OPTION) {
             initGame();
@@ -110,7 +110,7 @@ public final class TetrisController extends JFrame implements ActionListener {
           pause();
           break;
         case KeyEvent.VK_ESCAPE:
-          int option_exit = JOptionPane.showConfirmDialog(null, "Želite li završiti igru?", "Zatvoriti?",
+          int option_exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit game?", "Exit?",
               JOptionPane.YES_NO_OPTION);
           if (option_exit == JOptionPane.YES_OPTION) {
             System.exit(0);
