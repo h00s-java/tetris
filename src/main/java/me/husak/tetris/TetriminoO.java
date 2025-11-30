@@ -5,10 +5,10 @@ import javafx.scene.paint.Color;
 public final class TetriminoO extends Tetrimino {
   public TetriminoO(Point position) {
     super(new Block[] {
-        new Block(0, 0, Color.rgb(255, 196, 42)),
-        new Block(0, 1, Color.rgb(255, 196, 42)),
-        new Block(1, 0, Color.rgb(255, 196, 42)),
-        new Block(1, 1, Color.rgb(255, 196, 42))
+        new Block(0, 0, Color.rgb(255, 255, 0)),
+        new Block(0, 1, Color.rgb(255, 255, 0)),
+        new Block(1, 0, Color.rgb(255, 255, 0)),
+        new Block(1, 1, Color.rgb(255, 255, 0))
     },
         position,
         new Point[][] {
