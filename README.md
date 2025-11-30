@@ -2,7 +2,7 @@
 
 This repository contains my custom implementation of the popular game Tetris. The goal of this project is to create a fully functional game that adheres to all the guidelines and rules of the original game.
 
-![Tetris Game](https://static.husak.me/img/h00s-tetris.webp)
+![Tetris Game](https://static.husak.me/img/h00s-tetris-2.webp)
 
 ## Installation
 
