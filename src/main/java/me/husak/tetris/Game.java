@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -15,10 +14,8 @@ import javafx.stage.Stage;
 import java.util.Optional;
 
 public class Game extends Application {
-
   private Board board;
   private TetrisView tetrisView;
-  private Label statusBar;
 
   private boolean isPaused = false;
   private long lastUpdate = 0;
@@ -28,24 +25,18 @@ public class Game extends Application {
     BorderPane root = new BorderPane();
     root.setStyle("-fx-background-color: black;");
 
-    statusBar = new Label("0");
-    statusBar.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10; -fx-alignment: center;");
-    statusBar.setMaxWidth(Double.MAX_VALUE);
-    BorderPane.setAlignment(statusBar, javafx.geometry.Pos.CENTER);
-    root.setTop(statusBar);
-
     tetrisView = new TetrisView();
     root.setCenter(tetrisView);
 
     initGame();
 
-    Scene scene = new Scene(root, 220, 520);
+    Scene scene = new Scene(root, 600, 700);
     scene.setOnKeyPressed(this::handleInput);
 
     scene.widthProperty().addListener(e -> tetrisView.paint(board));
     scene.heightProperty().addListener(e -> tetrisView.paint(board));
 
-    stage.setTitle("Tetris");
+    stage.setTitle("Tetris FX");
     stage.setScene(scene);
     stage.show();
 
@@ -55,7 +46,6 @@ public class Game extends Application {
   private void initGame() {
     board = new Board();
     isPaused = false;
-    statusBar.setText("0");
     tetrisView.paint(board);
   }
 
@@ -67,7 +57,6 @@ public class Game extends Application {
 
         if (now - lastUpdate >= 1_000_000_000) {
           board.moveCurrentTetriminoDown();
-          updateStatus();
           checkGameState();
           lastUpdate = now;
         }
@@ -78,14 +67,10 @@ public class Game extends Application {
     timer.start();
   }
 
-  private void updateStatus() {
-    statusBar.setText(String.valueOf(board.getClearedLines()));
-  }
-
   private void checkGameState() {
     if (!board.isValid()) {
       isPaused = true;
-      statusBar.setText("GAME OVER - Lines: " + board.getClearedLines());
+      // TODO: Game over text
     }
   }
 
@@ -98,22 +83,43 @@ public class Game extends Application {
 
     if (!isPaused && board.isValid()) {
       switch (event.getCode()) {
-        case LEFT:      case NUMPAD4: board.moveCurrentTetriminoLeft(); break;
-        case RIGHT:     case NUMPAD6: board.moveCurrentTetriminoRight(); break;
-        case UP:        case NUMPAD9: board.rotateCurrentTetriminoClockwise(); break;
-        case NUMPAD7:                 board.rotateCurrentTetriminoCounterClockwise(); break;
-        case DOWN:      case NUMPAD5: board.moveCurrentTetriminoDown(); updateStatus(); break;
-        case SPACE:                   board.dropCurrentTetriminoDown(); updateStatus(); break;
-        default: break;
+        case LEFT:
+        case NUMPAD4:
+          board.moveCurrentTetriminoLeft();
+          break;
+        case RIGHT:
+        case NUMPAD6:
+          board.moveCurrentTetriminoRight();
+          break;
+        case UP:
+        case NUMPAD9:
+          board.rotateCurrentTetriminoClockwise();
+          break;
+        case NUMPAD7:
+          board.rotateCurrentTetriminoCounterClockwise();
+          break;
+        case DOWN:
+        case NUMPAD5:
+          board.moveCurrentTetriminoDown();
+          break;
+        case SPACE:
+          board.dropCurrentTetriminoDown();
+          break;
+        default:
+          break;
       }
     }
 
     switch (event.getCode()) {
-      case R: confirmRestart(); break;
-      case ESCAPE: confirmExit(); break;
-      default: break;
+      case R:
+        confirmRestart();
+        break;
+      case ESCAPE:
+        confirmExit();
+        break;
+      default:
+        break;
     }
-
     tetrisView.paint(board);
   }
 

@@ -201,6 +201,26 @@ public class Board {
     return clearedLines;
   }
 
+  public Tetrimino getHoldTetrimino() {
+    return null;
+  }
+
+  public Tetrimino getNextTetrimino() {
+    return null;
+  }
+
+  public int getScore() {
+    return 0;
+  }
+
+  public int getLevel() {
+    return 0;
+  }
+
+  public int getLines() {
+    return getClearedLines();
+  }
+
   @Override
   public String toString() {
     return "";
