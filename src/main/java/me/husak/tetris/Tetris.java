@@ -1,9 +1,9 @@
 package me.husak.tetris;
 
+import javafx.application.Application;
+
 public class Tetris {
   public static void main(String[] args) {
-    TetrisController tetrisController = new TetrisController();
-    tetrisController.setLocationRelativeTo(null);
-    tetrisController.setVisible(true);
+    Application.launch(Game.class, args);
   }
 }

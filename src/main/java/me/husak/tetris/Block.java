@@ -1,6 +1,6 @@
 package me.husak.tetris;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 
 public final class Block extends Point {
   private final Color color;

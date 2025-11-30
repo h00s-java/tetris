@@ -1,9 +1,22 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 group = 'me.husak'
 version = '1.0-SNAPSHOT'
+
+javafx {
+    version = "25"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+application {
+    mainModule = 'me.husak.tetris'
+    mainClass = 'me.husak.tetris.Tetris'
+    applicationDefaultJvmArgs = ['--enable-native-access=javafx.graphics']
+}
 
 repositories {
     mavenCentral()

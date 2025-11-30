@@ -3,7 +3,7 @@ package me.husak.tetris;
 public class Board {
   // TODO: add ghost piece
   // TODO: add next piece
-  private Block[][] blocks = new Block[HEIGHT][WIDTH];
+  private final Block[][] blocks = new Block[HEIGHT][WIDTH];
   private final RandomGenerator randomGenerator;
   private Tetrimino currentTetrimino, ghostTetrimino;
   private int clearedLines;

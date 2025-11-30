@@ -1,14 +1,14 @@
 package me.husak.tetris;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 
 public final class TetriminoL extends Tetrimino {
   public TetriminoL(Point position) {
     super(new Block[] {
-        new Block(-1, 0, new Color(255, 115, 18)),
-        new Block(0, 0, new Color(255, 115, 18)),
-        new Block(1, 0, new Color(255, 115, 18)),
-        new Block(1, 1, new Color(255, 115, 18))
+        new Block(-1, 0, Color.rgb(255, 115, 18)),
+        new Block(0, 0, Color.rgb(255, 115, 18)),
+        new Block(1, 0, Color.rgb(255, 115, 18)),
+        new Block(1, 1, Color.rgb(255, 115, 18))
     },
         position,
         new Point[][] {
