@@ -3,11 +3,12 @@ package me.husak.tetris;
 import java.util.Random;
 
 public class RandomGenerator {
-  private final Tetrimino[] bag = new Tetrimino[BAG_SIZE];
-  private int currentIndex;
-
   private static final int SET_SIZE = 7;
   private static final int BAG_SIZE = 14;
+
+  private final Tetrimino[] bag = new Tetrimino[BAG_SIZE];
+  private final Random random = new Random();
+  private int currentIndex;
 
   public RandomGenerator() {
     currentIndex = -1;
@@ -26,31 +27,26 @@ public class RandomGenerator {
   }
 
   private void randomizeSetAt(int index) {
-    final Random random = new Random();
-    final int maxIndex = index + SET_SIZE;
-    int randomIndex;
+    final int endIndex = index + SET_SIZE;
     Tetrimino temp;
 
     initializeSetAt(index);
-    for (int i = maxIndex - 1; i > index; i--) {
-      randomIndex = random.nextInt(i - index) + index;
-      temp = bag[randomIndex];
-      bag[randomIndex] = bag[i];
-      bag[i] = temp;
-    }
-    for (int i = index; i < maxIndex; i++) {
-      randomIndex = random.nextInt(maxIndex - i) + i;
+    for (int i = endIndex - 1; i > index; i--) {
+      int randomIndex = random.nextInt(i - index) + index;
       temp = bag[randomIndex];
       bag[randomIndex] = bag[i];
       bag[i] = temp;
     }
   }
 
-  public Tetrimino nextTetrimino() {
+  public void advance() {
     currentIndex = (currentIndex + 1) % BAG_SIZE;
     if (currentIndex % SET_SIZE == 0) {
       randomizeSetAt((currentIndex + SET_SIZE) % BAG_SIZE);
     }
-    return bag[currentIndex];
+  }
+
+  public Tetrimino peek(int lookahead) {
+    return bag[(currentIndex + lookahead) % BAG_SIZE];
   }
 }

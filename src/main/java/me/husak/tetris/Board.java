@@ -176,7 +176,8 @@ public class Board {
   }
 
   public void spawnTetrimino() {
-    currentTetrimino = randomGenerator.nextTetrimino();
+    randomGenerator.advance();
+    currentTetrimino = randomGenerator.peek(0);
     currentTetrimino.setPosition(WIDTH / 2 - 1, HEIGHT - 2);
     updateGhostTetrimino();
   }
