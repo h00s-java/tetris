@@ -140,8 +140,8 @@ public class TetrisView extends Pane {
     double rightCenterX = boardX + boardWidth + (getWidth() - (boardX + boardWidth)) / 2;
 
     // HOLD Section
-    drawLabel(gcBg, leftCenterX, boardY + 20, "HOLD");
-    drawPanelBackground(gcBg, leftCenterX, boardY + 35, 4);
+    // drawLabel(gcBg, leftCenterX, boardY + 20, "HOLD");
+    drawPanelBackground(gcBg, leftCenterX, boardY + 15, 4);
 
     // STATS Section
     double statsY = boardY + boardHeight - 150;
@@ -150,8 +150,8 @@ public class TetrisView extends Pane {
     drawLabel(gcBg, leftCenterX, statsY + 120, "SCORE");
 
     // NEXT Section
-    drawLabel(gcBg, rightCenterX, boardY + 20, "NEXT");
-    drawPanelBackground(gcBg, rightCenterX, boardY + 35, 12); // Taller for next pieces
+    // drawLabel(gcBg, rightCenterX, boardY + 20, "NEXT");
+    drawPanelBackground(gcBg, rightCenterX, boardY + 15, 21); // Taller for next pieces
   }
 
   // ==========================================
@@ -198,13 +198,13 @@ public class TetrisView extends Pane {
 
     // --- RIGHT SIDE (NEXT PIECES) ---
     double rightCenterX = boardX + boardWidth + (getWidth() - (boardX + boardWidth)) / 2;
-    double nextPanelTopY = boardY + 35; // Matches the background drawn in StaticHUD
+    double nextPanelTopY = boardY + 10; // Matches the background drawn in StaticHUD
 
     // spacing between preview pieces (approx 3.5 blocks tall)
     double spacingY = blockSize * 3.5;
 
     // Draw next 3 pieces
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 6; i++) {
       Tetrimino nextTetrimino = board.getNextTetrimino(i);
       if (nextTetrimino != null) {
         // Calculate center Y for this specific slot
