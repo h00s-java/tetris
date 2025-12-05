@@ -187,12 +187,69 @@ public class TetrisView extends Pane {
 
   private void drawDynamicHUD(Board board) {
     gcGame.setTextAlign(TextAlignment.CENTER);
+
+    // --- LEFT SIDE (STATS) ---
     double leftCenterX = boardX / 2;
     double statsY = boardY + boardHeight - 150;
 
     drawValue(gcGame, leftCenterX, statsY + 25, String.valueOf(board.getClearedLines()));
-    drawValue(gcGame, leftCenterX, statsY + 85, String.valueOf(board.getClearedLines() / 10)); // Example Level calc
-    drawValue(gcGame, leftCenterX, statsY + 145, String.valueOf(board.getClearedLines() * 100)); // Example Score calc
+    drawValue(gcGame, leftCenterX, statsY + 85, String.valueOf(board.getClearedLines() / 10));
+    drawValue(gcGame, leftCenterX, statsY + 145, String.valueOf(board.getClearedLines() * 100));
+
+    // --- RIGHT SIDE (NEXT PIECES) ---
+    double rightCenterX = boardX + boardWidth + (getWidth() - (boardX + boardWidth)) / 2;
+    double nextPanelTopY = boardY + 35; // Matches the background drawn in StaticHUD
+
+    // spacing between preview pieces (approx 3.5 blocks tall)
+    double spacingY = blockSize * 3.5;
+
+    // Draw next 3 pieces
+    for (int i = 0; i < 3; i++) {
+      Tetrimino nextTetrimino = board.getNextTetrimino(i);
+      if (nextTetrimino != null) {
+        // Calculate center Y for this specific slot
+        // Offset by 2 blocks to push it down into the panel slightly
+        double slotCenterY = nextPanelTopY + (blockSize * 2) + (i * spacingY);
+        drawNextTetrimino(gcGame, rightCenterX, slotCenterY, nextTetrimino);
+      }
+    }
+  }
+
+  private void drawNextTetrimino(GraphicsContext gc, double centerX, double centerY, Tetrimino piece) {
+    // 1. Calculate the bounding box of the piece to center it correctly
+    int minX = Integer.MAX_VALUE;
+    int maxX = Integer.MIN_VALUE;
+    int minY = Integer.MAX_VALUE;
+    int maxY = Integer.MIN_VALUE;
+
+    for (Block b : piece.getBlocks()) {
+      minX = Math.min(minX, b.getX());
+      maxX = Math.max(maxX, b.getX());
+      minY = Math.min(minY, b.getY());
+      maxY = Math.max(maxY, b.getY());
+    }
+
+    // 2. Determine width/height in pixels
+    double piecePixelWidth = (maxX - minX + 1) * blockSize;
+    double piecePixelHeight = (maxY - minY + 1) * blockSize;
+
+    // 3. Calculate start position (Top-Left visual anchor)
+    // We align the geometric center of the piece to (centerX, centerY)
+    double startX = centerX - (piecePixelWidth / 2);
+    double startY = centerY + (piecePixelHeight / 2); // Start at bottom because Y is inverted in game logic
+
+    // 4. Draw individual blocks
+    for (Block b : piece.getBlocks()) {
+      // Calculate relative position from the bounding box origin
+      double relX = (b.getX() - minX) * blockSize;
+      double relY = (b.getY() - minY) * blockSize;
+
+      double finalX = startX + relX;
+      // Invert Y: subtract relative Y from the bottom anchor
+      double finalY = startY - relY - blockSize;
+
+      drawBlockAbsolute(gc, finalX, finalY, b.getColor());
+    }
   }
 
   // ==========================================

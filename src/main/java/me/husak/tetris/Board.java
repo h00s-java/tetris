@@ -190,6 +190,14 @@ public class Board {
     return ghostTetrimino;
   }
 
+  public Tetrimino getHoldTetrimino() {
+    return null;
+  }
+
+  public Tetrimino getNextTetrimino(int lookahead) {
+    return randomGenerator.peek(lookahead + 1);
+  }
+
   public Block[][] getBlocks() {
     return blocks;
   }
@@ -200,14 +208,6 @@ public class Board {
 
   public int getClearedLines() {
     return clearedLines;
-  }
-
-  public Tetrimino getHoldTetrimino() {
-    return null;
-  }
-
-  public Tetrimino getNextTetrimino() {
-    return null;
   }
 
   public int getScore() {
