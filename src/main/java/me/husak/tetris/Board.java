@@ -21,7 +21,8 @@ public class Board {
   }
 
   public interface BoardChangeListener {
-    void onBoardChangeListener();
+    void onBoardChange();
+    void onLineCleared(int row);
   }
 
   public void setBoardChangeListener(BoardChangeListener l) {
@@ -30,7 +31,13 @@ public class Board {
 
   public void notifyBoardChange() {
     if (boardChangeListener != null) {
-      boardChangeListener.onBoardChangeListener();
+      boardChangeListener.onBoardChange();
+    }
+  }
+
+  private void notifyLineCleared(int row) {
+    if (boardChangeListener != null) {
+      boardChangeListener.onLineCleared(row);
     }
   }
 
@@ -73,6 +80,7 @@ public class Board {
   private void clearLines() {
     for (int i = 0; i < HEIGHT; i++) {
       if (isLineFull(blocks[i])) { // if line is full
+        notifyLineCleared(i);
         removeLineAt(i);
         i--; // return to position where was line that was removed
         clearedLines++;

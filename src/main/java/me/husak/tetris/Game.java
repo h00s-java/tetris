@@ -46,7 +46,17 @@ public class Game extends Application {
   private void initGame() {
     board = new Board();
     isPaused = false;
-    tetrisView.paint(board);
+    board.setBoardChangeListener(new Board.BoardChangeListener() {
+      @Override
+      public void onBoardChange() {
+      }
+
+      @Override
+      public void onLineCleared(int row) {
+        tetrisView.explodeLine(row);
+      }
+    });
+    // tetrisView.paint(board);
   }
 
   private void startGameLoop() {
